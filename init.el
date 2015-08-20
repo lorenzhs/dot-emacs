@@ -68,7 +68,7 @@
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(fill-column 80)
+ '(fill-column 100)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
@@ -94,7 +94,7 @@
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
- '(org-agenda-files (quote ("~/synca/01-OrgTassen/TODO.org")))
+ '(org-agenda-files (quote ("~/docs/notes/todo.org")))
  '(org-clock-mode-line-total (quote today))
  '(org-clock-persist t)
  '(org-confirm-shell-link-function nil)
@@ -111,9 +111,7 @@
  '(org-time-clocksum-format
    (quote
     (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
- '(processing-location "~/.bin-sync/processing-java")
- '(processing-sketchbook-dir "~/Dropbox/sketchbook")
- '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
+ '(reftex-default-bibliography (quote ("~/docs/library.bib")))
  '(reftex-label-alist
    (quote
     (("theorem" 116 "thm:" nil t
@@ -139,7 +137,7 @@
  '(tramp-default-method "ssh")
  '(tramp-remote-path
    (quote
-    ("~/.bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin")))
+    ("~/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" )))
  '(tramp-remote-process-environment
    (quote
     ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
@@ -152,7 +150,7 @@
 ;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
 
 ;(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
-(set-face-font 'default "-*-terminus-medium-r-*-*-18-*-*-*-*-*-*-*")
+(set-face-font 'default "-*-inconsolata-medium-r-*-*-17-*-*-*-*-*-*-*")
 
 ;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
 
@@ -318,21 +316,11 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-;; --- autoload lilypond major mode ---
-
-(add-to-list 'load-path "~/.emacs.d/lilypond-2.12.1/")
-(autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
-
-(add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
-(add-to-list 'auto-mode-alist '("\\.ily$" . LilyPond-mode))
-(add-to-list 'auto-mode-alist '("\\.lytex$" . latex-mode))
-(add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
-
 ;; --- set up hunspell for flyspell-mode ---
 
 (setq ispell-program-name "/usr/bin/hunspell")
 
-(setq ispell-local-dictionary "en_US")
+(setq ispell-local-dictionary "en_GB")
 (setq ispell-local-dictionary-alist
       '((nil     ; default
          "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
@@ -344,13 +332,6 @@
          "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "['-]" t ("-d" "de_DE") nil utf-8)
         )
       )
-
-;; --- pmwiki mode ---
-
-(setq pmwiki-main-wiki-base-uri
-      "http://taekwondo-wiki.de/")
-(setq pmwiki-main-homepage-uri
-      (concat pmwiki-main-wiki-base-uri "Main/HomePage"))
 
 ;; --- simple generic-mode for structures wiki notes ---
 
@@ -544,15 +525,6 @@
   (delete-other-windows))
 
 (global-set-key (kbd "C-x K") 'nuke-all-buffers)
-
-; set keys f9-f12 to insert German umlauts and sz
-(global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
-(global-set-key (kbd "<S-f9>") (lambda() (interactive) (insert ?\Ä)))
-(global-set-key (kbd "<f10>") (lambda() (interactive) (insert ?\ö)))
-(global-set-key (kbd "<S-f10>") (lambda() (interactive) (insert ?\Ö)))
-(global-set-key (kbd "<f11>") (lambda() (interactive) (insert ?\ü)))
-(global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
-(global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
 
 ; magit status
 
@@ -865,13 +837,13 @@
   ;(global-srecode-minor-mode 1)
 
   ;; add knowledge of qt to emacs
-  (semantic-add-system-include qt4-base-dir 'c++-mode)
-  (semantic-add-system-include (concat qt4-base-dir "/Qt") 'c++-mode)
-  (semantic-add-system-include (concat qt4-base-dir "/QtGui") 'c++-mode)
-  (semantic-add-system-include (concat qt4-base-dir "/QtCore") 'c++-mode)
-  (semantic-add-system-include (concat qt4-base-dir "/QtTest") 'c++-mode)
-  (semantic-add-system-include (concat qt4-base-dir "/QtNetwork") 'c++-mode)
-  (semantic-add-system-include (concat qt4-base-dir "/QtSvg") 'c++-mode)
+  ;; (semantic-add-system-include qt4-base-dir 'c++-mode)
+  ;; (semantic-add-system-include (concat qt4-base-dir "/Qt") 'c++-mode)
+  ;; (semantic-add-system-include (concat qt4-base-dir "/QtGui") 'c++-mode)
+  ;; (semantic-add-system-include (concat qt4-base-dir "/QtCore") 'c++-mode)
+  ;; (semantic-add-system-include (concat qt4-base-dir "/QtTest") 'c++-mode)
+  ;; (semantic-add-system-include (concat qt4-base-dir "/QtNetwork") 'c++-mode)
+  ;; (semantic-add-system-include (concat qt4-base-dir "/QtSvg") 'c++-mode)
 
   ;; whatever the symbol you are typing, this hot key automatically complete it for you.
   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
@@ -957,59 +929,12 @@
 (ede-enable-generic-projects)
 
 ;; CMake Projects
-(if (file-exists-p "~/Dropbox/stxxl/CMakeLists.txt")
-    (ede-cpp-root-project "stxxl"
-                          :file "~/Dropbox/stxxl/CMakeLists.txt"
-                          :include-path '("/include/")
-                          ))
-
-(if (file-exists-p "~/Dropbox/parallel-string-sorting/CMakeLists.txt")
-    (ede-cpp-root-project "parallel-string-sorting"
-                          :file "~/Dropbox/parallel-string-sorting/CMakeLists.txt"
-                          :compile-command "cd b && make -j4 && ctest && cd .."
-                          ))
-
-(if (file-exists-p "~/Dropbox/bispanning/CMakeLists.txt")
-    (ede-cpp-root-project "bispanning"
-                          :file "~/Dropbox/bispanning/CMakeLists.txt"
-                          ))
-
-(if (file-exists-p "~/Dropbox/dsort/CMakeLists.txt")
-    (ede-cpp-root-project "dsort"
-                          :file "~/Dropbox/dsort/CMakeLists.txt"
-                          ))
-
-(if (file-exists-p "~/Dropbox/divsufsort-lcp-pss/CMakeLists.txt")
-    (ede-cpp-root-project "divsufsort-lcp-pss"
-                          :file "~/Dropbox/divsufsort-lcp-pss/CMakeLists.txt"
-                          :compile-command "cd b && make -j4 && cd .."
-                          ))
 
 (if (file-exists-p "~/thrill/CMakeLists.txt")
     (ede-cpp-root-project "thrill"
                           :file "~/thrill/CMakeLists.txt"
                           :include-path '("/extlib/gtest/")
                           :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
-                          ))
-
-(if (file-exists-p "~/tbtrader/CMakeLists.txt")
-    (ede-cpp-root-project "tbtrader"
-                          :file "~/tbtrader/CMakeLists.txt"
-                          :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
-                          :compile-command "cd b && make -j4 && ctest && cd .. && doxygen"
-                          ))
-
-(if (file-exists-p "~/tbtrader/charter/CMakeLists.txt")
-    (ede-cpp-root-project "charter"
-                          :file "~/tbtrader/charter/CMakeLists.txt"
-                          :include-path '("../" "/qcustomplot/src/")
-                          :compile-command "cd ../b && make -j4 && ctest && cd charter/app && ./charter"
-                          ))
-
-(if (file-exists-p "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt")
-    (ede-cpp-root-project "panthema"
-                          :file "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt"
-                          :compile-command "cd ../build && make"
                           ))
 
 (defun qt-cedet-setup ()
@@ -1101,7 +1026,6 @@
 (setq openwith-associations '())
 
 (add-to-list 'openwith-associations '("\\.pdf\\'" "evince" (file)))
-(add-to-list 'openwith-associations '("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)))
 (add-to-list 'openwith-associations '("\\.ods\\'" "libreoffice" (file)))
 (add-to-list 'openwith-associations '("\\.xls\\'" "libreoffice" (file)))
 (add-to-list 'openwith-associations '("\\.odt\\'" "libreoffice" (file)))
@@ -1292,12 +1216,12 @@
 (defun my-terminal (&optional arg)
   "Launch terminal in current directory."
   (interactive)
-  ;(start-process "terminal" "*scratch*" "/usr/bin/urxvt")
+  ;(start-process "terminal" "*scratch*" "/usr/bin/gnome-terminal")
   (if
       ;; if buffer is under tramp
       (file-remote-p default-directory)
       (shell)
-    (start-process "terminal" nil "/usr/bin/urxvt")
+    (start-process "terminal" nil "/usr/bin/gnome-terminal")
     )
 )
 (define-key my-keymap-mode-map [f4] 'my-terminal)
