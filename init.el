@@ -64,11 +64,12 @@
  '(doc-view-continuous t)
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
+ '(ede-project-directories (quote ("/home/lorenz/docs/notes/commEffAlg")))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(fill-column 100)
+ '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
@@ -137,11 +138,11 @@
  '(tramp-default-method "ssh")
  '(tramp-remote-path
    (quote
-    ("~/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" )))
+    ("~/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin")))
  '(tramp-remote-process-environment
    (quote
     ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
- '(vc-handled-backends (quote (svn))))
+ '(vc-handled-backends (quote (git svn))))
 
 ;; ---------------------------
 ;; --- change default font ---
@@ -256,6 +257,7 @@
 (push 'dsvn my-el-get-packages)
 (push 'magit my-el-get-packages)
 ;(push 'magit-svn my-el-get-packages)
+(push 'diff-hl my-el-get-packages)
 
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
@@ -320,7 +322,7 @@
 
 (setq ispell-program-name "/usr/bin/hunspell")
 
-(setq ispell-local-dictionary "en_GB")
+(setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist
       '((nil     ; default
          "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
@@ -930,9 +932,9 @@
 
 ;; CMake Projects
 
-(if (file-exists-p "~/thrill/CMakeLists.txt")
+(if (file-exists-p "~/coding/thrill/thrill/CMakeLists.txt")
     (ede-cpp-root-project "thrill"
-                          :file "~/thrill/CMakeLists.txt"
+                          :file "~/coding/thrill/thrill/CMakeLists.txt"
                           :include-path '("/extlib/gtest/")
                           :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
                           ))
@@ -1242,3 +1244,7 @@
   )
 
 (add-hook 'ibuffer-hook 'my-ibuffer-keys)
+
+;; Diff-hl
+(require 'diff-hl)
+(global-diff-hl-mode)
