@@ -2,7 +2,6 @@
 # name: operator>>
 # key: op>>
 # --
-istream& operator>>(istream& s, const ${1:type}& ${2:c})
-{
-         $0
+istream &operator>>(istream &s, const ${1:type} &${2:c}) {
+    $0
 }

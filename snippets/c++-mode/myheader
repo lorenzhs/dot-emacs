@@ -3,20 +3,11 @@
 # key: myheader
 # binding: direct-keybinding
 # --
-/*******************************************************************************
- * $1/<file>
- *
- * $2
- ******************************************************************************/
 
-#ifndef ${1:$(upcase yas-text)}_NEW_HEADER
-#define ${1:$(upcase yas-text)}_NEW_HEADER
+#pragma once
 
 namespace $1 {
 
 
 } // namespace $1
 
-#endif // !${1:$(upcase yas-text)}_NEW_HEADER
-
-/******************************************************************************/

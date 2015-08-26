@@ -3,11 +3,9 @@
 # key: class
 # binding: direct-keybinding
 # --
-class ${1:Class}
-{
+class ${1:Class} {
 public:
-    $1()
-    {
+    $1() {
     }
 
 protected:
