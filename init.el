@@ -356,16 +356,16 @@
 
 ;; --- autoload dokuwiki editing mode ---
 
-(global-unset-key [(control v)])
+;; (global-unset-key [(control v)])
 
-(autoload 'dokuwiki-mode "dokuwiki" "DokuWiki Mode" t)
-(autoload 'dokuwiki-get-page "dokuwiki" "DokuWiki Mode" t)
+;; (autoload 'dokuwiki-mode "dokuwiki" "DokuWiki Mode" t)
+;; (autoload 'dokuwiki-get-page "dokuwiki" "DokuWiki Mode" t)
 
-(global-set-key [(control v)(control d)] 'dokuwiki-get-page)
+;; (global-set-key [(control v)(control d)] 'dokuwiki-get-page)
 
-(setq dokuwiki-username "Timo"
-      dokuwiki-password "test"
-      dokuwiki-base-url "idlebox.net/dw")
+;; (setq dokuwiki-username "Timo"
+;;       dokuwiki-password "test"
+;;       dokuwiki-base-url "idlebox.net/dw")
 
 ;; --- org-mode customizations ---
 
