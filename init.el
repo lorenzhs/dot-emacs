@@ -1250,3 +1250,9 @@
 ;; Diff-hl
 (require 'diff-hl)
 (global-diff-hl-mode)
+
+;; Trim trailing whitespace in C++ code
+(add-hook 'c++-mode-hook
+  (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+(require 'highlight-chars)
