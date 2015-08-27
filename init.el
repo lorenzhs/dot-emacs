@@ -592,7 +592,9 @@
         try-complete-file-name
         try-expand-all-abbrevs
         try-expand-list
-        try-expand-line))
+        try-expand-line
+        ggtags-try-complete-tag))
+
 
 ; special bindings for latex quickies
 
