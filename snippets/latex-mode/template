@@ -16,7 +16,7 @@
 \usepackage[english]{babel}
 
 \title{${1:title}}
-\author{${2:Timo Bingmann}}
+\author{${2:Lorenz Hübschle-Schneider}}
 
 % small margin
 \usepackage[tmargin=20mm,bmargin=20mm,lmargin=20mm,rmargin=20mm]{geometry}
