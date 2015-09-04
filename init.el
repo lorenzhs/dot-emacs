@@ -1256,3 +1256,8 @@
   (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
 (require 'highlight-chars)
+
+;; auctex
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(setq TeX-parse-self t) ; Enable parse on load.
+(setq TeX-auto-save t) ; Enable parse on save.
