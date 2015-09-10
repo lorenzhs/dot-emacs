@@ -256,7 +256,7 @@
 ;; version control
 (push 'dsvn my-el-get-packages)
 (push 'magit my-el-get-packages)
-;(push 'magit-svn my-el-get-packages)
+(push 'magit-svn my-el-get-packages)
 (push 'diff-hl my-el-get-packages)
 
 ;; email and news reader
@@ -544,14 +544,13 @@
 
 ; svn integration
 
-(autoload 'svn-status "dsvn" "Run `svn status'." t)
-(autoload 'svn-update "dsvn" "Run `svn update'." t)
-
-(global-set-key (kbd "<C-f11>") 'svn-status)
+;; (autoload 'svn-status "dsvn" "Run `svn status'." t)
+;; (autoload 'svn-update "dsvn" "Run `svn update'." t)
+;; (global-set-key (kbd "<C-f11>") 'svn-status)
 
 ; go to last edit point
 
-(global-set-key [(ctrl meta l)] 'goto-last-change);
+(global-set-key [(ctrl meta l)] 'goto-last-change)
 
 ; bind Backspace and Delete keys with M- and C- to special kill functions
 
