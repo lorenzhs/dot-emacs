@@ -1261,6 +1261,11 @@
 (setq TeX-parse-self t) ; Enable parse on load.
 (setq TeX-auto-save t) ; Enable parse on save.
 
+;; Display time
+(setq display-time-24hr-format t)
+(setq display-time-default-load-average nil)
+;;(setq display-time-format "%k:%M")
+(display-time-mode t)
 
 ;; open master file
 (find-file "~/docs/notes/todo.org")
