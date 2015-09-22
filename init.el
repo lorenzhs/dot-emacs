@@ -930,10 +930,12 @@
 
 ;; CMake Projects
 
-(if (file-exists-p "~/coding/thrill/thrill/CMakeLists.txt")
+(if (file-exists-p "~/coding/thrill/CMakeLists.txt")
     (ede-cpp-root-project "thrill"
-                          :file "~/coding/thrill/thrill/CMakeLists.txt"
-                          :include-path '("/extlib/gtest/")
+                          :file "~/coding/thrill/CMakeLists.txt"
+                          :include-path '("/extlib/googletest/googletest/include")
+                          :include-path '("extlib/googletest/googlemock/include")
+                          :include-path '("/extlib/cereal/include")
                           :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
                           ))
 
