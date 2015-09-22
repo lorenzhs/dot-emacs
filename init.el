@@ -532,12 +532,9 @@
 
 (global-set-key (kbd "<C-f12>") 'magit-status)
 
-; auto-load magit-svn-mode if git-svn repo is detected.
-(add-hook 'magit-mode-hook
-          (lambda()
-            ;(require 'magit-svn)
-            ;(if (magit-svn-get-ref-info) (magit-svn-mode))
-            ))
+;; auto-load magit extensions when configured in the repo
+;; (for svn, this is `git config --add magit.extension svn`)
+(add-hook 'magit-mode-hook 'magit-load-config-extensions)
 
 ;; Git-Commit-Mode: flyspell
 (add-hook 'git-commit-mode-hook 'turn-on-flyspell)
