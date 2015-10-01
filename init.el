@@ -946,6 +946,14 @@
                           :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
                           ))
 
+(if (file-exists-p "~/coding/topk/pac/Makefile")
+    (ede-cpp-root-project "topk"
+                          :file "~/coding/topk/pac/Makefile"
+                          :include-path '("/opt/intel/mkl/include")
+                          :include-path '("~/local/include")
+                          :compile-command "make"
+                          ))
+
 (defun qt-cedet-setup ()
   "Set up c-mode and related modes. Includes support for Qt code (signal, slots and alikes)."
 
