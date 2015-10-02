@@ -1262,6 +1262,7 @@
 
 ;; Diff-hl
 (require 'diff-hl)
+(global-diff-hl-mode)
 (global-diff-hl-amend-mode)
 
 ;; Trim trailing whitespace in C++ code
