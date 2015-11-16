@@ -11,3 +11,6 @@ el-get
 /ac-comphist.dat
 /elpa/
 /org-clock-save.el
+GPATH
+GRTAGS
+GTAGS

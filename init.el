@@ -112,6 +112,11 @@
  '(org-time-clocksum-format
    (quote
     (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
+ '(package-archives
+   (quote
+    (("gnu" . "https://elpa.gnu.org/packages/")
+     ("melpa" . "https://melpa.org/packages/")
+     ("marmalade" . "https://marmalade-repo.org/packages/"))))
  '(reftex-default-bibliography (quote ("~/docs/library.bib")))
  '(reftex-label-alist
    (quote
@@ -1260,6 +1265,19 @@
 (setq display-time-default-load-average nil)
 ;;(setq display-time-format "%k:%M")
 (display-time-mode t)
+
+(let ((trustfile
+       (replace-regexp-in-string
+        "\\\\" "/"
+        (replace-regexp-in-string
+         "\n" ""
+         (shell-command-to-string "python -m certifi")))))
+  (setq tls-program
+        (list
+         (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
+                 (if (eq window-system 'w32) ".exe" "") trustfile)))
+  (setq gnutls-verify-error t)
+  (setq gnutls-trustfiles (list trustfile)))
 
 ;; open master file
 (find-file "~/docs/notes/todo.org")
