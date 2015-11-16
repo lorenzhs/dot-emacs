@@ -328,9 +328,7 @@
 
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist
-      '((nil     ; default
-         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
-        ("en_US" ; Yankee English
+      '(("en_US" ; Yankee English
          "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
         ("en_GB" ; British English
          "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
@@ -749,25 +747,6 @@
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
-
-;; -------------------
-;; --- rebox2 mode ---
-;; -------------------
-
-(require 'rebox2)
-
-;; customisation of rebox
-(rebox-register-template
- 71 999 '("??! box123456"))
-
-(rebox-register-template
- 272 999
- '("/*!"
-   " * box123456"
-   " */"))
-
-;; set styles
-(setq rebox-style-loop '(71 272))
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
