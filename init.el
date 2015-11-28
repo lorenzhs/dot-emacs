@@ -259,7 +259,6 @@
 (push 'python-mode my-el-get-packages)
 (push 'tt-mode my-el-get-packages)
 (push 'thrift-mode my-el-get-packages)
-(push 'processing-mode my-el-get-packages)
 (push 'scala-mode2 my-el-get-packages)
 
 ;; version control
@@ -1276,6 +1275,7 @@
         (list
          (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
                  (if (eq window-system 'w32) ".exe" "") trustfile)))
+  (setq tls-checktrust t)
   (setq gnutls-verify-error t)
   (setq gnutls-trustfiles (list trustfile)))
 
