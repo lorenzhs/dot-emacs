@@ -73,6 +73,7 @@
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
+ '(gc-cons-threshold 20000000)
  '(gdb-many-windows t)
  '(ggtags-highlight-tag-delay 1.0)
  '(git-commit-fill-column 1000)
@@ -128,7 +129,7 @@
       -2)
      ("definition" 100 "def:" nil t
       ("definition" "def")
-      -2))) t)
+      -2))))
  '(safe-local-variable-values
    (quote
     ((c-tab-always-indent . t)
@@ -1007,6 +1008,7 @@
 
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets/"              ;; personal snippets
+        "~/.emacs.d/yasnippet-snippets/"    ;; default snippets
         ))
 
 (require 'yasnippet)
