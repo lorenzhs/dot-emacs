@@ -1079,11 +1079,11 @@
 ;; --- Processing Hotkeys ---
 ;; --------------------------
 
-(defun processing-mode-init ()
-  (local-set-key [f5] 'processing-sketch-run)
-  )
+;(defun processing-mode-init ()
+;  (local-set-key [f5] 'processing-sketch-run)
+;  )
 
-(add-hook 'processing-mode-hook 'processing-mode-init)
+;(add-hook 'processing-mode-hook 'processing-mode-init)
 
 ;; ------------------------
 ;; --- Multiple Cursors ---
