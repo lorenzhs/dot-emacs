@@ -261,6 +261,7 @@
 (push 'tt-mode my-el-get-packages)
 (push 'thrift-mode my-el-get-packages)
 (push 'scala-mode2 my-el-get-packages)
+(push 'rust-mode my-el-get-packages)
 
 ;; version control
 (push 'dsvn my-el-get-packages)
@@ -459,6 +460,10 @@
 ; some more c++ files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tcc\\'" . c++-mode))
+
+; rust
+;(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ; doxygen mode
 (defun my-dox-mode ()
