@@ -1209,7 +1209,7 @@
 
 ;; window handling
 (define-key my-keymap-mode-map "\M-`" 'delete-other-windows)
-(define-key my-keymap-mode-map "\M-2" 'new-frame)
+(define-key my-keymap-mode-map "\M-2" 'make-frame)
 (define-key my-keymap-mode-map "\M-3" 'delete-frame)
 
 ;; loading the buffer list
