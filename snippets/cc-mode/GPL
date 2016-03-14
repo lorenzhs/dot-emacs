@@ -3,12 +3,12 @@
 # key: GPL
 # --
 /*******************************************************************************
- * src/$1
+ * $1
  *
  * $2
  *
  *******************************************************************************
- * Copyright (C) `(substring (current-time-string) -4)` Timo Bingmann <tb@panthema.net>
+ * Copyright (C) `(substring (current-time-string) -4)` Lorenz Hübschle-Schneider <lorenz@4z2.de>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
