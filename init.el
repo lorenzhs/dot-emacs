@@ -332,16 +332,17 @@
 
 (setq ispell-program-name "/usr/bin/hunspell")
 
-(setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist
       '(("en_US" ; Yankee English
-         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
+         "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "en_US") nil utf-8)
         ("en_GB" ; British English
-         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
+         "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-d" "en_GB") nil utf-8)
         ("de_DE"
          "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "['-]" t ("-d" "de_DE") nil utf-8)
         )
       )
+(setq ispell-local-dictionary "en_US")
+
 
 ;; --- simple generic-mode for structures wiki notes ---
 
