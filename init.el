@@ -1258,7 +1258,8 @@
 
 ;; Trim trailing whitespace in C++ code
 (add-hook 'c++-mode-hook
-  (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+  (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace))
+  (lambda () (setq tab-width 4)))
 
 (require 'highlight-chars)
 
