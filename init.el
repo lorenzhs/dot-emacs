@@ -1213,7 +1213,8 @@
 (define-key my-keymap-mode-map "\M-3" 'delete-frame)
 
 ;; loading the buffer list
-(define-key my-keymap-mode-map [C-x C-b] 'buffer-menu)
+;(define-key my-keymap-mode-map [C-x C-b] 'buffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 (define-key my-keymap-mode-map [M-S-up] 'ibuffer)
 
 ;; fast nagivation in buffer stack
@@ -1287,6 +1288,10 @@
   (setq tls-checktrust t)
   (setq gnutls-verify-error t)
   (setq gnutls-trustfiles (list trustfile)))
+
+(setq require-final-newline t
+      load-prefer-newer t
+      mouse-yank-at-point t)
 
 ;; open master file
 (find-file "~/docs/notes/todo.org")
