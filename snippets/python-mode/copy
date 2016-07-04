@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: copy
+# key: copy
+# binding: direct-keybinding
+# --
+# Copyright (C) `(format-time-string "%Y" (current-time))` Lorenz Hübschle-Schneider <lorenz@4z2.de>

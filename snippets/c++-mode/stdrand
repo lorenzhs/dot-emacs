@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: stdrand
+# key: stdrand
+# binding: direct-keybinding
+# --
+std::default_random_engine ${1:name}(std::random_device { } ())
