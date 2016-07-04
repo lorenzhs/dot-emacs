@@ -250,7 +250,7 @@
 (push 'apache-mode my-el-get-packages)
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
-(push 'csharp-mode my-el-get-packages)
+;(push 'csharp-mode my-el-get-packages)
 (push 'css-mode my-el-get-packages)
 (push 'cedet my-el-get-packages)
 (push 'ecb my-el-get-packages)
@@ -1213,7 +1213,7 @@
 (define-key my-keymap-mode-map "\M-3" 'delete-frame)
 
 ;; loading the buffer list
-;(define-key my-keymap-mode-map [C-x C-b] 'buffer)
+;(define-key my-keymap-mode-map [C-x C-b] 'ibuffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (define-key my-keymap-mode-map [M-S-up] 'ibuffer)
 
