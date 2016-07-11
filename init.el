@@ -96,7 +96,7 @@
  '(magit-diff-arguments (quote ("--ignore-all-space")))
  '(magit-git-global-arguments
    (quote
-    ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Timo Bingmann" "-c" "user.email=tbgit@panthema.net")))
+    ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true")))
  '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
  '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
  '(magit-pull-arguments nil)
