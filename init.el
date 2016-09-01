@@ -237,6 +237,7 @@
 (push 'leuven-theme my-el-get-packages)
 (push 'ggtags my-el-get-packages)
 (push 'emacs-ycmd my-el-get-packages)
+(push 'company-mode my-el-get-packages)
 ;(push 'helm-gtags my-el-get-packages)
 (push 'google-this my-el-get-packages)
 (push 'diminish my-el-get-packages)
@@ -999,10 +1000,16 @@
 (setq stack-trace-on-error t)
 
 (require 'ycmd)
-(add-hook 'after-init-hook #'global-ycmd-mode)
-(set-variable 'ycmd-server-command '("python" "/home/lorenz/3rdpartycode/ycmd/ycmd"))
+(add-hook 'c++-mode-hook 'ycmd-mode)
+(set-variable 'ycmd-server-command '("python3" "/home/lorenz/3rdpartycode/ycmd/ycmd"))
 (set-variable 'ycmd-global-config "/home/lorenz/.emacs.d/ycmd-conf.py")
 (set-variable 'ycmd-extra-conf-handler 'load) ; I couldn't get the asking bit to work
+(set-variable 'request-message-level -1) ; less noisy
+
+; load company mode and company-ycmd
+(add-hook 'after-init-hook 'global-company-mode)
+(require 'company-ycmd)
+(company-ycmd-setup)
 
 ;; --------------------
 ;; --- ido and smex ---
