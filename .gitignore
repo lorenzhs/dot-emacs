@@ -15,3 +15,4 @@ GPATH
 GRTAGS
 GTAGS
 /url/
+*.pyc

@@ -236,6 +236,7 @@
 (push 'grandshell my-el-get-packages)
 (push 'leuven-theme my-el-get-packages)
 (push 'ggtags my-el-get-packages)
+(push 'emacs-ycmd my-el-get-packages)
 ;(push 'helm-gtags my-el-get-packages)
 (push 'google-this my-el-get-packages)
 (push 'diminish my-el-get-packages)
@@ -996,6 +997,12 @@
 
 (setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
 (setq stack-trace-on-error t)
+
+(require 'ycmd)
+(add-hook 'after-init-hook #'global-ycmd-mode)
+(set-variable 'ycmd-server-command '("python" "/home/lorenz/3rdpartycode/ycmd/ycmd"))
+(set-variable 'ycmd-global-config "/home/lorenz/.emacs.d/ycmd-conf.py")
+(set-variable 'ycmd-extra-conf-handler 'load) ; I couldn't get the asking bit to work
 
 ;; --------------------
 ;; --- ido and smex ---
