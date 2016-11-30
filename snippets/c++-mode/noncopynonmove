@@ -1,0 +1,14 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: noncopynonmove
+# key: noncopynonmove
+# binding: direct-keybinding
+# expand-env: ((yas-indent-line 'fixed))
+# --
+//! non-copyable: delete copy-constructor
+${1:class}(const $1 &) = delete;
+//! non-copyable: delete assignment operator
+$1 & operator = (const $1 &) = delete;
+//! non-movable: delete move-constructor
+$1($1 &&) = default;
+//! non-omvable: delete move-assignment operator
+$1 & operator = ($1 &&) = default;

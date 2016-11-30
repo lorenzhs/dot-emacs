@@ -1,3 +1,9 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -937,7 +943,7 @@
 
 ;; EDE
 (global-ede-mode 1)
-(ede-enable-generic-projects)
+;(ede-enable-generic-projects)
 
 ;; CMake Projects
 
@@ -947,7 +953,7 @@
                           :include-path '("/extlib/googletest/googletest/include")
                           :include-path '("extlib/googletest/googlemock/include")
                           :include-path '("/extlib/cereal/include")
-                          :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
+                          :compile-command "cd build-clang && ninja"
                           ))
 
 (if (file-exists-p "~/coding/topk/pac/Makefile")
