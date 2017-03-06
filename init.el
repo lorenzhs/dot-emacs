@@ -66,6 +66,9 @@
  '(cperl-indent-parens-as-block t)
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
+ '(custom-safe-themes
+   (quote
+    ("a38397ce1d9a29a964198d8d60830b43de146feec772f32980aa436d13b74d9a" default)))
  '(dired-dwim-target t)
  '(diredp-hide-details-initially-flag nil)
  '(diredp-image-preview-in-tooltip nil)
@@ -80,6 +83,15 @@
  '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
+ '(font-latex-match-reference-keywords
+   (quote
+    (("printbibliography" "[{")
+     ("addbibresource" "[{")
+     ("autoref" "[{")
+     ("cref" "[{")
+     ("Cref" "[{")
+     ("crefrange" "[{")
+     ("Crefrange" "[{"))))
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(gc-cons-threshold 20000000)
  '(gdb-many-windows t)
@@ -132,6 +144,7 @@
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")
      ("marmalade" . "https://marmalade-repo.org/packages/"))))
+ '(package-selected-packages (quote (let-alist)))
  '(reftex-default-bibliography (quote ("~/docs/library.bib")))
  '(reftex-label-alist
    (quote
@@ -143,10 +156,17 @@
       -2)
      ("definition" 100 "def:" nil t
       ("definition" "def")
-      -2))))
+      -2))) t)
+ '(reftex-ref-style-default-list (quote ("Hyperref")))
  '(safe-local-variable-values
    (quote
-    ((c-tab-always-indent . t)
+    ((eval add-to-list
+           (make-variable-buffer-local
+            (quote LaTeX-fold-math-spec-list))
+           (quote
+            ("[tabular]"
+             ("tabular"))))
+     (c-tab-always-indent . t)
      (nxml-child-indent . 4)
      (rebox-min-fill-column . 100)
      (rebox-min-fill-column . 110)
@@ -155,13 +175,15 @@
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
- '(tramp-default-method "ssh")
+ '(tramp-default-method "scp")
  '(tramp-remote-path
    (quote
     ("~/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin")))
  '(tramp-remote-process-environment
    (quote
     ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
+ '(tramp-ssh-controlmaster-options "" t)
+ '(tramp-use-ssh-controlmaster-options t)
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
@@ -248,12 +270,14 @@
 (push 'google-this my-el-get-packages)
 (push 'diminish my-el-get-packages)
 (push 'tramp my-el-get-packages)
+(push 'iedit my-el-get-packages)
+(push 'clang-format my-el-get-packages)
 
-(push 'auto-complete my-el-get-packages)
-(push 'auto-complete-auctex my-el-get-packages)
+;(push 'auto-complete my-el-get-packages)
+;(push 'auto-complete-auctex my-el-get-packages)
 ;(push 'auto-complete-css my-el-get-packages)
 ;(push 'auto-complete-yasnippet my-el-get-packages)
-(push 'auto-complete-c-headers my-el-get-packages)
+;(push 'auto-complete-c-headers my-el-get-packages)
 
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
@@ -267,20 +291,21 @@
 
 ;; programming modes
 (push 'apache-mode my-el-get-packages)
+(push 'cedet my-el-get-packages)
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
-;(push 'csharp-mode my-el-get-packages)
-(push 'css-mode my-el-get-packages)
-(push 'cedet my-el-get-packages)
-(push 'ecb my-el-get-packages)
+;(push 'css-mode my-el-get-packages)
+;(push 'ecb my-el-get-packages)
+(push 'ess my-el-get-packages) ; for R
 (push 'lua-mode my-el-get-packages)
+(push 'mmm-mode my-el-get-packages)
 (push 'php-mode my-el-get-packages)
 (push 'protobuf-mode my-el-get-packages)
 (push 'python-mode my-el-get-packages)
-(push 'tt-mode my-el-get-packages)
-(push 'thrift-mode my-el-get-packages)
 (push 'scala-mode my-el-get-packages)
-(push 'rust-mode my-el-get-packages)
+(push 'thrift-mode my-el-get-packages)
+(push 'tt-mode my-el-get-packages)
+;(push 'csharp-mode my-el-get-packages)
 
 ;; version control
 (push 'dsvn my-el-get-packages)
@@ -390,14 +415,16 @@
 
 ;; --- org-mode customizations ---
 
-(add-hook 'org-mode-hook (lambda ()
-                           (local-unset-key [(meta shift up)])
-                           (local-unset-key [(meta shift down)])
-                           (local-set-key [(control shift up)] 'org-move-subtree-up)
-                           (local-set-key [(control shift down)] 'org-move-subtree-down)
-                           (local-set-key [(control shift left)] 'org-promote-subtree)
-                           (local-set-key [(control shift right)] 'org-demote-subtree)
-                           ))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-unset-key [(meta shift up)])
+            (local-unset-key [(meta shift down)])
+            (local-set-key [(control shift up)] 'org-move-subtree-up)
+            (local-set-key [(control shift down)] 'org-move-subtree-down)
+            (local-set-key [(control shift left)] 'org-promote-subtree)
+            (local-set-key [(control shift right)] 'org-demote-subtree)
+            (local-set-key [(control return)] 'org-insert-subheading)
+            ))
 
 (setq org-default-notes-file "~/synca/01-OrgTassen/TODO.org")
 
@@ -407,7 +434,7 @@
 ;; active Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((sql . t) (sh . t)))
+ '((sql . t) (shell . t)))
 
 ;; save the clock history across Emacs sessions
 (org-clock-persistence-insinuate)
@@ -932,6 +959,9 @@
                ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . 'font-lock-keyword-face)
                ("\\<\\(char[0-9]+_t\\)\\>" . 'font-lock-keyword-face)))
 
+  ;; iedit mode
+  (local-set-key (kbd "C-\\") 'iedit-mode)
+
   (qt-cedet-setup)
   )
 
@@ -1142,6 +1172,34 @@
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 
+;; ----------------------------------------
+;; --- CamelCase to snake_case and back ---
+;; ----------------------------------------
+
+(defun split-name (s)
+  (split-string
+   (let ((case-fold-search nil))
+     (downcase
+      (replace-regexp-in-string "\\([a-z]\\)\\([A-Z]\\)" "\\1 \\2" s)))
+   "[^A-Za-z0-9]+"))
+
+(defun camelcase  (s) (mapconcat 'capitalize (split-name s) ""))
+(defun underscore (s) (mapconcat 'downcase   (split-name s) "_"))
+
+(defun camelscore (s)
+  (cond ((string-match-p "-" s)         (colonize s))
+        ((string-match-p "_" s)	        (dasherize s))
+        (t                              (underscore s))))
+
+(defun camelscore-word-at-point ()
+  (interactive)
+  (let* ((case-fold-search nil)
+         (beg (and (skip-chars-backward "[:alnum:]_") (point)))
+         (end (and (skip-chars-forward  "[:alnum:]_") (point)))
+         (txt (buffer-substring beg end))
+         (cml (camelscore txt)) )
+    (if cml (progn (delete-region beg end) (insert cml))) ))
+
 ;; ------------------------------------------------
 ;; --- Increment and Decrement Numbers at Point ---
 ;; ------------------------------------------------
@@ -1283,6 +1341,38 @@
   )
 
 (add-hook 'ibuffer-hook 'my-ibuffer-keys)
+
+;; -------------------------------
+;; --- Less Latency with Tramp ---
+;; -------------------------------
+
+(defvar disable-tramp-backups '(all))
+
+(eval-after-load "tramp"
+  '(progn
+     ;; Modified from https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-and-Backup.html
+     (setq backup-enable-predicate
+           (lambda (name)
+             (and (normal-backup-enable-predicate name)
+                  ;; Disable all tramp backups
+                  (and disable-tramp-backups
+                       (member 'all disable-tramp-backups)
+                       (not (file-remote-p name 'method)))
+                  (not ;; disable backup for tramp with the listed methods
+                   (let ((method (file-remote-p name 'method)))
+                     (when (stringp method)
+                       (member method disable-tramp-backups)))))))
+
+     (defun tramp-set-auto-save--check (original)
+       (if (funcall backup-enable-predicate (buffer-file-name))
+           (funcall original)
+         (auto-save-mode -1)))
+
+     (advice-add 'tramp-set-auto-save :around #'tramp-set-auto-save--check)
+
+     ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
+     (setq tramp-ssh-controlmaster-options "")))
+
 
 ;; Diff-hl
 (require 'diff-hl)
