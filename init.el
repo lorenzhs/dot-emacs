@@ -172,6 +172,7 @@
      (rebox-min-fill-column . 110)
      (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
+ '(sieve-manage-default-port "4190")
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
@@ -211,15 +212,6 @@
 (global-set-key (kbd "<mouse-6>") (lambda (event) (interactive "e")))
 (global-set-key (kbd "<mouse-7>") (lambda (event) (interactive "e")))
 
-;; ------------------------------
-;; --- overlay cedet packages ---
-;; ------------------------------
-
-;(setq cedet-root-path (file-name-as-directory "~/.emacs.d/cedet-bzr/"))
-
-;(load-file (concat cedet-root-path "cedet-devel-load.el"))
-;(add-to-list 'load-path (concat cedet-root-path "contrib"))
-
 ;; ---------------------------------
 ;; --- el-get package management ---
 ;; ---------------------------------
@@ -248,30 +240,30 @@
 (setq my-el-get-packages '(el-get))
 
 ;; general emacs behaviour extensions
+(push 'ag my-el-get-packages)
 (push 'bm my-el-get-packages)
+(push 'clang-format my-el-get-packages)
 (push 'column-marker my-el-get-packages)
+(push 'diminish my-el-get-packages)
+(push 'flymake my-el-get-packages)
 (push 'folding my-el-get-packages)
+(push 'ggtags my-el-get-packages)
+(push 'google-this my-el-get-packages)
 (push 'goto-last-change my-el-get-packages)
+(push 'grandshell my-el-get-packages)
+(push 'iedit my-el-get-packages)
+(push 'leuven-theme my-el-get-packages)
+(push 'multiple-cursors my-el-get-packages)
 (push 'rainbow-delimiters my-el-get-packages)
 (push 'rebox2 my-el-get-packages)
 (push 'smex my-el-get-packages)
 (push 'smooth-scrolling my-el-get-packages)
-(push 'yasnippet my-el-get-packages )
-(push 'multiple-cursors my-el-get-packages)
-(push 'flymake my-el-get-packages)
-(push 'ag my-el-get-packages)
+(push 'tramp my-el-get-packages)
 (push 'ws-butler my-el-get-packages)
-(push 'grandshell my-el-get-packages)
-(push 'leuven-theme my-el-get-packages)
-(push 'ggtags my-el-get-packages)
+(push 'yasnippet my-el-get-packages )
 (push 'emacs-ycmd my-el-get-packages)
 (push 'company-mode my-el-get-packages)
 ;(push 'helm-gtags my-el-get-packages)
-(push 'google-this my-el-get-packages)
-(push 'diminish my-el-get-packages)
-(push 'tramp my-el-get-packages)
-(push 'iedit my-el-get-packages)
-(push 'clang-format my-el-get-packages)
 
 ;(push 'auto-complete my-el-get-packages)
 ;(push 'auto-complete-auctex my-el-get-packages)
@@ -294,7 +286,6 @@
 (push 'cedet my-el-get-packages)
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
-;(push 'css-mode my-el-get-packages)
 ;(push 'ecb my-el-get-packages)
 (push 'ess my-el-get-packages) ; for R
 (push 'lua-mode my-el-get-packages)
@@ -811,6 +802,84 @@
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
+;; -------------------
+;; --- rebox2 mode ---
+;; -------------------
+
+(require 'rebox2)
+
+;; customisation of rebox
+(rebox-register-template
+ 71 999 '("??! box123456"))
+
+(rebox-register-template
+ 272 999
+ '("/*!"
+   " * box123456"
+   " */"))
+
+;; set styles
+(setq rebox-style-loop '(71 272))
+
+;; --------------------------------
+;; --- C/C++ Mode Configuration ---
+;; --------------------------------
+
+(defun tb-c-common-hook ()
+  ;; switch between .cpp/.hpp files
+  (local-set-key [f3] 'ff-find-other-file)
+
+  ;; gnu global tag lookup
+  (ggtags-mode 1)
+
+  ;; use rebox2 mode
+  (local-set-key [(shift meta q)] 'rebox-cycle)
+
+  ;; flyspell mode for comments
+  (flyspell-prog-mode)
+
+  ;; org-table mode support for comments
+  (orgtbl-mode)
+
+  ;; iedit mode
+  (local-set-key (kbd "C-\\") 'iedit-mode)
+
+  ;; add C++11 keywords to font-lock
+  (require 'modern-cpp-font-lock)
+  (modern-c++-font-lock-mode)
+
+  ;; ------------------------------------------------------------
+  ;; add keywords for Qt code (signals, slots, and some Q_ macros
+
+  (setq c-protection-key
+        (concat "\\<\\(public\\|public slot\\|protected"
+                "\\|protected slot\\|private\\|private slot"
+                "\\)\\>")
+        c-C++-access-key
+        (concat "\\<\\(signals\\|public\\|protected\\|private"
+                "\\|public slots\\|protected slots\\|private slots"
+                "\\)\\>[ \t]*:"))
+
+  ;; modify the colour of slots to match public, private, etc ...
+  (font-lock-add-keywords
+   'c++-mode '(("\\<\\(slots\\|signals\\)\\>" . font-lock-type-face)))
+  ;; make new font for rest of qt keywords
+  (make-face 'qt-keywords-face)
+  (set-face-foreground 'qt-keywords-face "MediumPurple")
+  ;; qt keywords
+  (font-lock-add-keywords 'c++-mode '(("\\<Q_[A-Z]*\\>" . 'qt-keywords-face)))
+  (font-lock-add-keywords 'c++-mode '(("\\<SIGNAL\\|SLOT\\>" . 'qt-keywords-face)))
+
+  ;; ---[ end Qt code ]------------------------------------------
+)
+
+(add-hook 'c-mode-common-hook 'tb-c-common-hook)
+
+;; mark 80th column on some modes
+
+(add-hook 'c-mode-common-hook (lambda () (column-marker-1 80)))
+(add-hook 'cmake-mode-hook (lambda () (column-marker-1 80)))
+
 ;; ---------------------------
 ;; --- CEDET Configuration ---
 ;; ---------------------------
@@ -826,7 +895,7 @@
 ; activates displaying of possible name completions in the idle time
 ;(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
 ; activates highlighting of local names that are the same as name of tag under cursor
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
+; (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
 ; activates automatic parsing of source code in the idle time
 ;(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
 ; enables automatic bookmarking of tags that you edited
@@ -844,27 +913,27 @@
 ; shows changes in the text that weren't processed by incremental parser yet.
 ;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
 
-(setq qt4-base-dir "/usr/include/qt4")
+;; (setq qt4-base-dir "/usr/include/qt4")
 
-(defvar semantic-lex-c-preprocessor-symbol-file '())
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-large.h"))
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
+;; (defvar semantic-lex-c-preprocessor-symbol-file '())
+;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
+;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-large.h"))
+;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
 
-;; Activate semantic
-(setq semanticdb-default-save-directory "~/.cache/emacs/semanticdb/")
-(semantic-mode 1)
+;; ;; Activate semantic
+;; (setq semanticdb-default-save-directory "~/.cache/emacs/semanticdb/")
+;; (semantic-mode 1)
 
 ; load semantic databases
-(require 'semantic/ia)
-(require 'semantic/bovine/gcc) ; or depending on you compiler
+;; (require 'semantic/ia)
+;; (require 'semantic/bovine/gcc) ; or depending on you compiler
 
 ;; if you want to enable support for gnu global
 ;(semanticdb-enable-gnu-global-databases 'c-mode)
 ;(semanticdb-enable-gnu-global-databases 'c++-mode)
 
 ; load eassist
-(add-to-list 'load-path "~/.emacs.d/el-get/cedet/contrib")
+;(add-to-list 'load-path "~/.emacs.d/el-get/cedet/contrib")
 ;(require 'eassist)
 
 ;; enable ctags for some languages:
@@ -889,18 +958,15 @@
   ;; (semantic-add-system-include (concat qt4-base-dir "/QtNetwork") 'c++-mode)
   ;; (semantic-add-system-include (concat qt4-base-dir "/QtSvg") 'c++-mode)
 
-  ;; whatever the symbol you are typing, this hot key automatically complete it for you.
-  (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
-  ;; another way to complete the symbol you are typing
-  (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
+  ;; ;; whatever the symbol you are typing, this hot key automatically complete it for you.
+  ;; (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
+  ;; ;; another way to complete the symbol you are typing
+  ;; (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
 
-  ;; when you typed . or -> after an object name, use this key to show possible public member functions or data members.
-  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-  ;; visit the header file under cursor
-  (local-set-key "\C-c=" 'semantic-decoration-include-visit)
-
-  ;; switch between files
-  (local-set-key [f3] 'ff-find-other-file)
+  ;; ;; when you typed . or -> after an object name, use this key to show possible public member functions or data members.
+  ;; (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+  ;; ;; visit the header file under cursor
+  ;; (local-set-key "\C-c=" 'semantic-decoration-include-visit)
 
   ;;
   ;; load eassist contrib library
@@ -908,9 +974,9 @@
   ;(local-set-key "\C-xt" 'eassist-switch-h-cpp)
   ;(local-set-key "\C-ce" 'eassist-list-methods)
   ;;
-  (local-set-key "\C-cr" 'semantic-symref)
-  ;; rename local variable under cursor
-  (local-set-key "\C-c\C-r" 'semantic-symref-rename-local-variable)
+  ;; (local-set-key "\C-cr" 'semantic-symref)
+  ;; ;; rename local variable under cursor
+  ;; (local-set-key "\C-c\C-r" 'semantic-symref-rename-local-variable)
 
   ;; jump to the definition of the symbol under cursor
   ;(local-set-key "\C-c<" 'semantic-ia-fast-jump)
@@ -933,107 +999,28 @@
   ;; show emacs code browser
   ;(local-set-key "\C-cb" 'ecb-activate)
 
-  (ggtags-mode 1)
-
   ;; auto-complete integration
   ;(add-to-list 'ac-sources 'ac-source-gtags)
   ;(add-to-list 'ac-sources 'ac-source-semantic)
   ;(add-to-list 'ac-sources 'ac-source-c-headers)
 
-  ;; use rebox2 mode
-  (local-set-key [(shift meta q)] 'rebox-cycle)
-
-  ;; flyspell mode for comments
-  (flyspell-prog-mode)
-
-  ;; org-table mode support for comments
-  (orgtbl-mode)
-
   ;; change paragraph definition to correctly wrap doxygen \param and \tparam
   ;; lines.
   (setq paragraph-start "\\(//+[!]?\\|\\**\\)[ ]*\\([ ]*$\\|[@\\\\]\\(param\\|tparam\\|return\\|pre\\)\\)\\|\f")
-
-  ;; add C++11 keywords
-  (font-lock-add-keywords
-   'c++-mode '(
-               ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . 'font-lock-keyword-face)
-               ("\\<\\(char[0-9]+_t\\)\\>" . 'font-lock-keyword-face)))
-
-  ;; iedit mode
-  (local-set-key (kbd "C-\\") 'iedit-mode)
-
-  (qt-cedet-setup)
   )
 
-(add-hook 'c-mode-common-hook 'my-cedet-hook)
+; (add-hook 'c-mode-common-hook 'my-cedet-hook)
 (add-hook 'lisp-mode-hook 'my-cedet-hook)
 (add-hook 'scheme-mode-hook 'my-cedet-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
 (add-hook 'erlang-mode-hook 'my-cedet-hook)
 
-;; EDE
-(global-ede-mode 1)
-;(ede-enable-generic-projects)
-
-;; CMake Projects
-
-(if (file-exists-p "~/coding/thrill/CMakeLists.txt")
-    (ede-cpp-root-project "thrill"
-                          :file "~/coding/thrill/CMakeLists.txt"
-                          :include-path '("/extlib/googletest/googletest/include")
-                          :include-path '("extlib/googletest/googlemock/include")
-                          :include-path '("/extlib/cereal/include")
-                          :compile-command "cd build && ninja -v"
-                          ))
-
-(if (file-exists-p "~/coding/topk/pac/Makefile")
-    (ede-cpp-root-project "topk"
-                          :file "~/coding/topk/pac/Makefile"
-                          :include-path '("/opt/intel/mkl/include")
-                          :include-path '("~/local/include")
-                          :compile-command "make"
-                          ))
-
-(defun qt-cedet-setup ()
-  "Set up c-mode and related modes. Includes support for Qt code (signal, slots and alikes)."
-
-  ;; qt keywords and stuff ...
-  ;; set up indenting correctly for new qt kewords
-  (setq c-protection-key (concat "\\<\\(public\\|public slot\\|protected"
-                                 "\\|protected slot\\|private\\|private slot"
-                                 "\\)\\>")
-        c-C++-access-key (concat "\\<\\(signals\\|public\\|protected\\|private"
-                                 "\\|public slots\\|protected slots\\|private slots"
-                                 "\\)\\>[ \t]*:"))
-
-  ;; modify the colour of slots to match public, private, etc ...
-  (font-lock-add-keywords 'c++-mode '(("\\<\\(slots\\|signals\\)\\>" . font-lock-type-face)))
-  ;; make new font for rest of qt keywords
-  (make-face 'qt-keywords-face)
-  (set-face-foreground 'qt-keywords-face "MediumPurple")
-  ;; qt keywords
-  (font-lock-add-keywords 'c++-mode '(("\\<Q_[A-Z]*\\>" . 'qt-keywords-face)))
-  (font-lock-add-keywords 'c++-mode '(("\\<SIGNAL\\|SLOT\\>" . 'qt-keywords-face)))
-  ;(font-lock-add-keywords 'c++-mode '(("\\<Q[A-Z][A-Za-z]*\\>" . 'qt-keywords-face)))
-  ;(font-lock-add-keywords 'c++-mode '(("\\<Q[A-Z_]+\\>" . 'qt-keywords-face)))
-  ;(font-lock-add-keywords 'c++-mode
-  ;                        '(("\\<q\\(Debug\\|Wait\\|Printable\\|Max\\|Min\\|Bound\\)\\>" . 'font-lock-builtin-face)))
-
-  ;(setq c-macro-names-with-semicolon '("Q_OBJECT" "Q_PROPERTY" "Q_DECLARE" "Q_ENUMS"))
-  ;(c-make-macro-with-semi-re)
-  )
-
-;; mark 80th column on some modes
-
-(add-hook 'c-mode-common-hook (lambda () (column-marker-1 80)))
-(add-hook 'cmake-mode-hook (lambda () (column-marker-1 80)))
-
 ;; --------------------------------
 ;; --- ECB - Emacs Code Browser ---
 ;; --------------------------------
 
-(setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
-(setq stack-trace-on-error t)
+;; (setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
+;; (setq stack-trace-on-error t)
 
 (require 'ycmd)
 (add-hook 'c++-mode-hook 'ycmd-mode)
