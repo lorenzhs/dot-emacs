@@ -983,7 +983,7 @@
                           :include-path '("/extlib/googletest/googletest/include")
                           :include-path '("extlib/googletest/googlemock/include")
                           :include-path '("/extlib/cereal/include")
-                          :compile-command "cd build-clang && ninja"
+                          :compile-command "cd build && ninja -v"
                           ))
 
 (if (file-exists-p "~/coding/topk/pac/Makefile")
