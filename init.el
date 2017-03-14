@@ -156,7 +156,7 @@
       -2)
      ("definition" 100 "def:" nil t
       ("definition" "def")
-      -2))) t)
+      -2))))
  '(reftex-ref-style-default-list (quote ("Hyperref")))
  '(safe-local-variable-values
    (quote
@@ -283,7 +283,7 @@
 
 ;; programming modes
 (push 'apache-mode my-el-get-packages)
-(push 'cedet my-el-get-packages)
+; (push 'cedet my-el-get-packages)
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
 ;(push 'ecb my-el-get-packages)
