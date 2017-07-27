@@ -1,0 +1,4 @@
+(:name spotify.el
+       :type git
+       :url "https://github.com/remvee/spotify-el"
+       :description "Control Spotify from Emacs.")
