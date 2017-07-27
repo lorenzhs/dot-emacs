@@ -1402,5 +1402,8 @@
       load-prefer-newer t
       mouse-yank-at-point t)
 
+; python-mode: use python3
+(setq py-python-command "python3")
+
 ;; open master file
 (find-file "~/docs/notes/todo.org")
