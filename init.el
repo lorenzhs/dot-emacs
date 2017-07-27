@@ -310,6 +310,8 @@
 ;(push 'tc my-el-get-packages ) ;; trivial cite
 ;(push 'gnus-notify my-el-get-packages)
 
+(push 'spotify.el my-el-get-packages)
+
 ;; END PACKAGE LIST for el-get
 
 ;; install missing packages from list above
