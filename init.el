@@ -632,6 +632,10 @@
 (global-set-key [(meta delete)] 'kill-word)
 (global-set-key [(control delete)] 'dove-forward-kill-word)
 
+;; spotify
+(global-set-key (kbd "<XF86AudioPlay>") 'spotify-playpause)
+(global-set-key (kbd "<XF86AudioPause>") 'spotify-playpause)
+
 ;; hippie-expand is dabbrev expand on steroids
 
 (global-set-key "\M-/" 'hippie-expand)
