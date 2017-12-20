@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: BSD-2 License (short)
+# key: BSDs
+# --
+
+/*******************************************************************************
+ * $1`(file-name-nondirectory(buffer-file-name))`
+ *
+ * Copyright (C) `(substring (current-time-string) -4)` Lorenz Hübschle-Schneider <lorenz@4z2.de>
+ *
+ * All rights reserved. Published under the BSD-2 license in the LICENSE file.
+ ******************************************************************************/

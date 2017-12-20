@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-# name: guard
+# name: include guard
 # key: guard
 # --
-#ifndef ${1:NAME}_HEADER
+#ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (or (buffer-file-name) ""))))`}_HEADER
 #define $1_HEADER
 
 $0
