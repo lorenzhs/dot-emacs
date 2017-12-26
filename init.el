@@ -260,7 +260,7 @@
 (push 'smooth-scrolling my-el-get-packages)
 (push 'tramp my-el-get-packages)
 (push 'ws-butler my-el-get-packages)
-(push 'yasnippet my-el-get-packages )
+(push 'yasnippet my-el-get-packages)
 (push 'emacs-ycmd my-el-get-packages)
 (push 'company-mode my-el-get-packages)
 ;(push 'helm-gtags my-el-get-packages)
@@ -1068,8 +1068,8 @@
 ;; -----------------
 
 (setq yas-snippet-dirs
-      '("~/.emacs.d/snippets/"              ;; personal snippets
-        "~/.emacs.d/yasnippet-snippets/"    ;; default snippets
+      '("~/.emacs.d/snippets/"                      ;; personal snippets
+        "~/.emacs.d/yasnippet-snippets/snippets"    ;; default snippets
         ))
 
 (require 'yasnippet)
