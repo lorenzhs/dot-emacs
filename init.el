@@ -1370,7 +1370,12 @@
 ;; Diff-hl
 (require 'diff-hl)
 (global-diff-hl-mode)
-(global-diff-hl-amend-mode)
+(diff-hl-dired-mode)
+; (global-diff-hl-amend-mode)
+;; use histogram diff
+; (setq vc-git-diff-switches '("--histogram"))
+;; Required for magit >= 2.4
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
 ;; Trim trailing whitespace in C++ code
 (add-hook 'c++-mode-hook
