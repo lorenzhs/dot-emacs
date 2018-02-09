@@ -296,6 +296,7 @@
 (push 'scala-mode my-el-get-packages)
 (push 'thrift-mode my-el-get-packages)
 (push 'tt-mode my-el-get-packages)
+(push 'rust-mode my-el-get-packages)
 ;(push 'csharp-mode my-el-get-packages)
 
 ;; version control
