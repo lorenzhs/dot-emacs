@@ -1314,7 +1314,8 @@
       ;; if buffer is under tramp
       (file-remote-p default-directory)
       (shell)
-    (start-process "terminal" nil "/usr/bin/gnome-terminal")
+    ;;(start-process "terminal" nil "/usr/bin/gnome-terminal")
+    (call-process "gnome-terminal" nil 0 nil)
     )
 )
 (define-key my-keymap-mode-map [f4] 'my-terminal)
