@@ -1418,4 +1418,4 @@
 (setq py-python-command "python3")
 
 ;; open master file
-(find-file "~/docs/notes/todo.org")
+;(find-file "~/docs/notes/todo.org")
