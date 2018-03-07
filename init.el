@@ -47,6 +47,11 @@
     ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
  '(auto-save-interval 3000)
  '(auto-save-timeout 60)
+ '(bibtex-comma-after-last-field t)
+ '(bibtex-entry-format
+   (quote
+    (opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields)))
+ '(bibtex-maintain-sorted-entries (quote crossref))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style
@@ -146,18 +151,7 @@
      ("marmalade" . "https://marmalade-repo.org/packages/"))))
  '(package-selected-packages (quote (let-alist)))
  '(reftex-default-bibliography (quote ("~/docs/library.bib")))
- '(reftex-label-alist
-   (quote
-    (("theorem" 116 "thm:" nil t
-      ("theorem" "th.")
-      -2)
-     ("lemma" 116 "lem:" nil t
-      ("lemma" "lem")
-      -2)
-     ("definition" 100 "def:" nil t
-      ("definition" "def")
-      -2))))
- '(reftex-ref-style-default-list (quote ("Hyperref")))
+ '(reftex-ref-style-default-list (quote ("Cleveref")))
  '(safe-local-variable-values
    (quote
     ((eval add-to-list
@@ -660,14 +654,6 @@
   (interactive)
   (turn-on-reftex)
   (visual-line-mode 1)
-  (local-set-key "\C-\M-z" (lambda () (interactive) (insert "\\mathbb{Z}")))
-  (local-set-key "\C-\M-n" (lambda () (interactive) (insert "\\mathbb{N}")))
-  (local-set-key (kbd "C-M-S-n") (lambda () (interactive) (insert "\\!{}_1\\mathbb{N}_")))
-  (local-set-key "\C-\M-q" (lambda () (interactive) (insert "\\mathbb{Q}")))
-  (local-set-key "\C-\M-f" (lambda () (interactive) (insert "\\mathbb{F}")))
-  (local-set-key "\C-\M-r" (lambda () (interactive) (insert "\\mathbb{R}")))
-  (local-set-key "\C-b" (lambda () (interactive) (insert "\\mathbb{")))
-  (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
   (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
   (local-set-key [M-S-down] (lambda () (interactive) (reftex-toc)))
   (local-set-key "\C-\M-r" (lambda () (interactive) (reftex-reference)))
@@ -714,8 +700,9 @@
 ;; additional label styles
 (setq reftex-label-alist
       '(
-        ("theorem" ?t "thm:" "~\\ref{%s}" t   ("theorem" "th.") -2)
-        ("lemma"   ?t "lem:" "~\\ref{%s}" t   ("lemma"   "lem") -2)
+        ("theorem"   ?t "thm:" "~\\ref{%s}" t   ("theorem"   "th.") -2)
+        ("lemma"     ?t "lem:" "~\\ref{%s}" t   ("lemma"     "lem") -2)
+        ("algorithm" ?a "alg:" "~\\ref{%s}" t   ("algorithm" "alg") -2)
         ))
 
 ;; --------------------
