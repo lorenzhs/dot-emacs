@@ -171,9 +171,9 @@
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-default-method "scp")
- '(tramp-remote-path
-   (quote
-    ("~/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin")))
+ ;; '(tramp-remote-path
+ ;;   (quote
+ ;;    ("~/bin/" "~/local/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin")))
  '(tramp-remote-process-environment
    (quote
     ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
@@ -1355,6 +1355,10 @@
      ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
      (setq tramp-ssh-controlmaster-options "")))
 
+;; Setting up tramp-remote-path requires tramp to be loaded...
+(require 'tramp)
+'(add-to-list 'tramp-remote-path "~/bin")
+'(add-to-list 'tramp-remote-path "~/local/bin")
 
 ;; Diff-hl
 (require 'diff-hl)
