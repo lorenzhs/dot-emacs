@@ -152,6 +152,8 @@
  '(package-selected-packages (quote (let-alist)))
  '(reftex-default-bibliography (quote ("~/docs/library.bib")))
  '(reftex-ref-style-default-list (quote ("Cleveref")))
+ '(replace-lax-whitespace t)
+ '(replace-regexp-lax-whitespace t)
  '(safe-local-variable-values
    (quote
     ((eval add-to-list
@@ -166,6 +168,7 @@
      (rebox-min-fill-column . 110)
      (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
+ '(search-whitespace-regexp "[ \t\r\n]+")
  '(sieve-manage-default-port "4190")
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
@@ -252,7 +255,7 @@
 (push 'rebox2 my-el-get-packages)
 (push 'smex my-el-get-packages)
 (push 'smooth-scrolling my-el-get-packages)
-(push 'tramp my-el-get-packages)
+;(push 'tramp my-el-get-packages)
 (push 'ws-butler my-el-get-packages)
 (push 'yasnippet my-el-get-packages)
 (push 'emacs-ycmd my-el-get-packages)
@@ -631,6 +634,8 @@
 (global-set-key (kbd "<XF86AudioPlay>") 'spotify-playpause)
 (global-set-key (kbd "<XF86AudioPause>") 'spotify-playpause)
 
+(global-set-key "\C-e" 'delete-region)
+
 ;; hippie-expand is dabbrev expand on steroids
 
 (global-set-key "\M-/" 'hippie-expand)
@@ -824,7 +829,7 @@
   (local-set-key [f3] 'ff-find-other-file)
 
   ;; gnu global tag lookup
-  (ggtags-mode 1)
+  ;(ggtags-mode 1)
 
   ;; use rebox2 mode
   (local-set-key [(shift meta q)] 'rebox-cycle)
@@ -835,12 +840,12 @@
   ;; org-table mode support for comments
   (orgtbl-mode)
 
-  ;; iedit mode
-  (local-set-key (kbd "C-\\") 'iedit-mode)
-
   ;; add C++11 keywords to font-lock
   (require 'modern-cpp-font-lock)
   (modern-c++-font-lock-mode)
+
+  ;; hide "mc++fl" minor mode
+  (diminish 'modern-c++-font-lock-mode)
 
   ;; ------------------------------------------------------------
   ;; add keywords for Qt code (signals, slots, and some Q_ macros
@@ -1307,6 +1312,9 @@
 )
 (define-key my-keymap-mode-map [f4] 'my-terminal)
 
+;; C-\\ -> iedit mode
+(define-key my-keymap-mode-map (kbd "C-\\") 'iedit-mode)
+
 ;; globally activate keymap
 (define-globalized-minor-mode
   global-my-keymap-mode my-keymap-mode turn-on-my-keymap-mode)
@@ -1330,35 +1338,35 @@
 
 (defvar disable-tramp-backups '(all))
 
-(eval-after-load "tramp"
-  '(progn
-     ;; Modified from https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-and-Backup.html
-     (setq backup-enable-predicate
-           (lambda (name)
-             (and (normal-backup-enable-predicate name)
-                  ;; Disable all tramp backups
-                  (and disable-tramp-backups
-                       (member 'all disable-tramp-backups)
-                       (not (file-remote-p name 'method)))
-                  (not ;; disable backup for tramp with the listed methods
-                   (let ((method (file-remote-p name 'method)))
-                     (when (stringp method)
-                       (member method disable-tramp-backups)))))))
+;; (eval-after-load "tramp"
+;;   '(progn
+;;      (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+;;      ;; Modified from https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-and-Backup.html
+;;      (setq backup-enable-predicate
+;;            (lambda (name)
+;;              (and (normal-backup-enable-predicate name)
+;;                   ;; Disable all tramp backups
+;;                   (and disable-tramp-backups
+;;                        (member 'all disable-tramp-backups)
+;;                        (not (file-remote-p name 'method)))
+;;                   (not ;; disable backup for tramp with the listed methods
+;;                    (let ((method (file-remote-p name 'method)))
+;;                      (when (stringp method)
+;;                        (member method disable-tramp-backups)))))))
 
-     (defun tramp-set-auto-save--check (original)
-       (if (funcall backup-enable-predicate (buffer-file-name))
-           (funcall original)
-         (auto-save-mode -1)))
+;;      (defun tramp-set-auto-save--check (original)
+;;        (if (funcall backup-enable-predicate (buffer-file-name))
+;;            (funcall original)
+;;          (auto-save-mode -1)))
 
-     (advice-add 'tramp-set-auto-save :around #'tramp-set-auto-save--check)
+;;      (advice-add 'tramp-set-auto-save :around #'tramp-set-auto-save--check)
 
-     ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
-     (setq tramp-ssh-controlmaster-options "")))
+;;      ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
+;;      (setq tramp-ssh-controlmaster-options "")))
 
-;; Setting up tramp-remote-path requires tramp to be loaded...
-(require 'tramp)
-'(add-to-list 'tramp-remote-path "~/bin")
-'(add-to-list 'tramp-remote-path "~/local/bin")
+(setq remote-file-name-inhibit-cache nil)
+(setq vc-ignore-dir-regexp
+      (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp))
 
 ;; Diff-hl
 (require 'diff-hl)
