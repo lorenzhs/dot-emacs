@@ -248,6 +248,7 @@
 (push 'google-this my-el-get-packages)
 (push 'goto-last-change my-el-get-packages)
 (push 'grandshell my-el-get-packages)
+(push 'ido-completing-read-plus my-el-get-packages)
 (push 'iedit my-el-get-packages)
 (push 'leuven-theme my-el-get-packages)
 (push 'multiple-cursors my-el-get-packages)
@@ -1042,7 +1043,17 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 
+; enable ido everywhere
+(require 'ido-completing-read+)
+(ido-ubiquitous-mode 1)
+(setq magit-completing-read-function 'magit-ido-completing-read)
+
+; configure smex
+(smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; ---------------------
 ;; --- auto-complete ---
