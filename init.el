@@ -240,6 +240,7 @@
 (push 'ag my-el-get-packages)
 (push 'bm my-el-get-packages)
 (push 'clang-format my-el-get-packages)
+(push 'browse-kill-ring my-el-get-packages)
 (push 'column-marker my-el-get-packages)
 (push 'diminish my-el-get-packages)
 (push 'flymake my-el-get-packages)
@@ -564,6 +565,10 @@
 ;(global-hl-line-mode 1)
 ;; enable inline images:
 ;(iimage-mode)
+
+; load browse-kill-ring and bind it to M-y if previous command wasn't a yank
+(require 'browse-kill-ring)
+(browse-kill-ring-default-keybindings)
 
 ;; --------------------------------
 ;; --- Some custom key bindings ---
