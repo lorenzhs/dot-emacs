@@ -1047,6 +1047,7 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
+(add-to-list 'ido-ignore-files "\.synctex\.gz")
 
 ; enable ido everywhere
 (require 'ido-completing-read+)
