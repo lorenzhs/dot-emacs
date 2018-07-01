@@ -1028,7 +1028,7 @@
 ;; (setq stack-trace-on-error t)
 
 (require 'ycmd)
-(add-hook 'c++-mode-hook 'ycmd-mode)
+(add-hook 'c-mode-common-hook 'ycmd-mode)
 (set-variable 'ycmd-server-command '("python3" "/home/lorenz/3rdpartycode/ycmd/ycmd"))
 (set-variable 'ycmd-global-config "/home/lorenz/.emacs.d/ycmd-conf.py")
 (set-variable 'ycmd-extra-conf-handler 'load) ; I couldn't get the asking bit to work
