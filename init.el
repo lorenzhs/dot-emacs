@@ -410,6 +410,10 @@
 
 (add-hook 'org-mode-hook
           (lambda ()
+            (require 'ox-bibtex)
+            (require 'ox-extra)
+            (ox-extras-activate '(ignore-headlines))
+            (setq org-latex-pdf-process (list "latexmk -f -pdf %f"))
             (local-unset-key [(meta shift up)])
             (local-unset-key [(meta shift down)])
             (local-set-key [(control shift up)] 'org-move-subtree-up)
