@@ -2,7 +2,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-(package-initialize)
+;(package-initialize)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -1434,9 +1434,6 @@
 (setq require-final-newline t
       load-prefer-newer t
       mouse-yank-at-point t)
-
-; python-mode: use python3
-(setq py-python-command "python3")
 
 ;;; DEAL WITH GNOME INTEGRATION
 ;;; save & shutdown when we get an "end of session" signal on dbus
