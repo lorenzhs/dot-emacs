@@ -3,5 +3,5 @@
 # key: microtype
 # binding: direct-keybinding
 # --
-\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,stretch=10,shrink=30]{microtype}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true]{microtype}
 \microtypecontext{spacing=nonfrench}
