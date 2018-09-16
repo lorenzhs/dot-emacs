@@ -794,6 +794,10 @@
 (setq smooth-scroll-margin 3)
 (setq smooth-scroll-strict-margins 't)
 
+;; terminal mouse support
+(when (eq window-system nil)
+    (xterm-mouse-mode t))
+
 ;; ---------------------------------
 ;; --- Window Movement Shortcuts ---
 ;; ---------------------------------
