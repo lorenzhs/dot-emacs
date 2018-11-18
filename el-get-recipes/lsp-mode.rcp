@@ -1,0 +1,4 @@
+(:name lsp-mode
+       :type github
+       :pkgname "emacs-lsp/lsp-mode"
+       :description "Language Server Protocol support")

@@ -1,0 +1,4 @@
+(:name lsp-ui
+       :type github
+       :pkgname "emacs-lsp/lsp-ui"
+       :description "LSP UI modules")

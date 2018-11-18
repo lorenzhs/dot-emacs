@@ -115,6 +115,7 @@
  '(ispell-highlight-face (quote flyspell-incorrect))
  '(jde-jdk (quote ("1.7.0.51")))
  '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
+ '(lsp-clangd-executable "clangd-8")
  '(lua-indent-level 4)
  '(magit-diff-arguments (quote ("--ignore-all-space")))
  '(magit-git-global-arguments
@@ -260,9 +261,11 @@
 ;(push 'tramp my-el-get-packages)
 (push 'ws-butler my-el-get-packages)
 (push 'yasnippet my-el-get-packages)
-(push 'emacs-ycmd my-el-get-packages)
-(push 'company-mode my-el-get-packages)
+;(push 'emacs-ycmd my-el-get-packages)
+;(push 'company-mode my-el-get-packages)
 ;(push 'helm-gtags my-el-get-packages)
+(push 'lsp-mode my-el-get-packages)
+(push 'lsp-clangd my-el-get-packages)
 
 ;(push 'auto-complete my-el-get-packages)
 ;(push 'auto-complete-auctex my-el-get-packages)
@@ -1035,17 +1038,23 @@
 ;; (setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
 ;; (setq stack-trace-on-error t)
 
-(require 'ycmd)
-(add-hook 'c-mode-common-hook 'ycmd-mode)
-(set-variable 'ycmd-server-command '("python3" "/home/lorenz/3rdpartycode/ycmd/ycmd"))
-(set-variable 'ycmd-global-config "/home/lorenz/.emacs.d/ycmd-conf.py")
-(set-variable 'ycmd-extra-conf-handler 'load) ; I couldn't get the asking bit to work
-(set-variable 'request-message-level -1) ; less noisy
+;; (require 'ycmd)
+;; (add-hook 'c-mode-common-hook 'ycmd-mode)
+;; (set-variable 'ycmd-server-command '("python3" "/home/lorenz/playground/ycmd/ycmd"))
+;; (set-variable 'ycmd-global-config "/home/lorenz/.emacs.d/ycmd-conf.py")
+;; (set-variable 'ycmd-extra-conf-handler 'load) ; I couldn't get the asking bit to work
+;; (set-variable 'request-message-level -1) ; less noisy
 
-; load company mode and company-ycmd
-(add-hook 'after-init-hook 'global-company-mode)
-(require 'company-ycmd)
-(company-ycmd-setup)
+;; ; load company mode and company-ycmd
+;; (add-hook 'after-init-hook 'global-company-mode)
+;; (require 'company-ycmd)
+;; (company-ycmd-setup)
+
+(require 'lsp-mode)
+(with-eval-after-load 'lsp-mode
+  (require 'lsp-clangd)
+  (add-hook 'c-mode-hook #'lsp-clangd-c-enable)
+  (add-hook 'c++-mode-hook #'lsp-clangd-c++-enable))
 
 ;; --------------------
 ;; --- ido and smex ---

@@ -1,0 +1,4 @@
+(:name lsp-clangd
+       :type github
+       :pkgname "emacs-lsp/lsp-clangd"
+       :description "LSP clangd support")
