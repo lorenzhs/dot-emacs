@@ -115,7 +115,6 @@
  '(ispell-highlight-face (quote flyspell-incorrect))
  '(jde-jdk (quote ("1.7.0.51")))
  '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
- '(lsp-clangd-executable "clangd-8")
  '(lua-indent-level 4)
  '(magit-diff-arguments (quote ("--ignore-all-space")))
  '(magit-git-global-arguments
@@ -265,7 +264,6 @@
 ;(push 'company-mode my-el-get-packages)
 ;(push 'helm-gtags my-el-get-packages)
 (push 'lsp-mode my-el-get-packages)
-(push 'lsp-clangd my-el-get-packages)
 
 ;(push 'auto-complete my-el-get-packages)
 ;(push 'auto-complete-auctex my-el-get-packages)
@@ -1051,10 +1049,12 @@
 ;; (company-ycmd-setup)
 
 (require 'lsp-mode)
-(with-eval-after-load 'lsp-mode
-  (require 'lsp-clangd)
-  (add-hook 'c-mode-hook #'lsp-clangd-c-enable)
-  (add-hook 'c++-mode-hook #'lsp-clangd-c++-enable))
+(require 'lsp-clients)
+(setq lsp-clients-clangd-executable "/usr/lib/llvm-8/bin/clangd")
+(lsp-clients-register-clangd)
+
+(add-hook 'c++-mode-hook 'lsp)
+(add-hook 'c-mode-hook 'lsp)
 
 ;; --------------------
 ;; --- ido and smex ---

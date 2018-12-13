@@ -1,4 +1,5 @@
 (:name lsp-mode
        :type github
        :pkgname "emacs-lsp/lsp-mode"
-       :description "Language Server Protocol support")
+       :description "Language Server Protocol support"
+       :depends (f ht spinner))
