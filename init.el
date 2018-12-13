@@ -264,6 +264,7 @@
 ;(push 'company-mode my-el-get-packages)
 ;(push 'helm-gtags my-el-get-packages)
 (push 'lsp-mode my-el-get-packages)
+(push 'company-lsp my-el-get-packages)
 
 ;(push 'auto-complete my-el-get-packages)
 ;(push 'auto-complete-auctex my-el-get-packages)
@@ -1048,10 +1049,14 @@
 ;; (require 'company-ycmd)
 ;; (company-ycmd-setup)
 
-(require 'lsp-mode)
+(require 'lsp)
 (require 'lsp-clients)
 (setq lsp-clients-clangd-executable "/usr/lib/llvm-8/bin/clangd")
 (lsp-clients-register-clangd)
+
+(require 'company)
+(setq company-backends '(company-lsp))
+(global-set-key (kbd "M-RET") 'completion-at-point)
 
 (add-hook 'c++-mode-hook 'lsp)
 (add-hook 'c-mode-hook 'lsp)
