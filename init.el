@@ -1037,7 +1037,6 @@
 (require 'lsp)
 (require 'lsp-clients)
 (setq lsp-clients-clangd-executable "/usr/lib/llvm-8/bin/clangd")
-(lsp-clients-register-clangd)
 
 (require 'company)
 (setq company-backends '(company-lsp))

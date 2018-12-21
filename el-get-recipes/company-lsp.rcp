@@ -1,0 +1,5 @@
+(:name company-lsp
+       :type github
+       :pkgname "tigersoldier/company-lsp"
+       :description "Company-mode support for LSP"
+       :depends (company-mode lsp-mode))
