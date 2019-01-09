@@ -1332,9 +1332,21 @@
     (start-process "terminal" nil "gnome-terminal")
     ;(call-process "gnome-terminal" nil 0 nil)
     )
+)
+
+(defun my-file-manager (&optional arg)
+  "Launch file-manager in current directory."
+  (interactive)
+  (if
+      ;; if buffer is under tramp
+      (file-remote-p default-directory)
+      (dired default-directory)
+    (start-process "file-manager" nil "xdg-open" default-directory)
+    ;;(call-process "xdg-open" nil 0 nil default-directory)
     )
 )
 (define-key my-keymap-mode-map [f4] 'my-terminal)
+(define-key my-keymap-mode-map [C-f4] 'my-file-manager)
 
 ;; C-\\ -> iedit mode
 (define-key my-keymap-mode-map (kbd "C-\\") 'iedit-mode)
