@@ -246,7 +246,7 @@
 (push 'flymake my-el-get-packages)
 (push 'folding my-el-get-packages)
 (push 'ggtags my-el-get-packages)
-(push 'google-this my-el-get-packages)
+;(push 'google-this my-el-get-packages)
 (push 'goto-last-change my-el-get-packages)
 (push 'grandshell my-el-get-packages)
 (push 'ido-completing-read-plus my-el-get-packages)
@@ -700,9 +700,9 @@
 ;; w -> google word under cursor
 ;; s -> google symbol under cursor
 
-(google-this-mode 1)
+;(google-this-mode 1)
 ;; hide "Google" minor mode
-(diminish 'google-this-mode)
+;(diminish 'google-this-mode)
 
 ;; -----------------------------
 ;; --- reftex customizations ---
