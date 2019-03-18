@@ -1054,6 +1054,8 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (add-to-list 'ido-ignore-files "\.synctex\.gz")
+; org before tex before pdf before others
+(setq ido-file-extensions-order '(".org" ".tex" ".pdf"))
 
 ; enable ido everywhere
 (require 'ido-completing-read+)
