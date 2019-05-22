@@ -1039,7 +1039,6 @@
 (setq lsp-clients-clangd-executable "/usr/lib/llvm-8/bin/clangd")
 
 (require 'company)
-(setq company-backends '(company-lsp))
 (global-set-key (kbd "M-RET") 'completion-at-point)
 
 (add-hook 'c++-mode-hook 'lsp)
