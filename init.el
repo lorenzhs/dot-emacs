@@ -478,6 +478,7 @@
 (add-hook 'dired-mode-hook 'set-my-dired-keys-hook)
 
 ;; whitespace cleaning butler mode
+(require 'ws-butler)
 (ws-butler-global-mode 1)
 
 ;; cap'n'proto
@@ -1408,6 +1409,7 @@
 ;; Diff-hl
 (require 'diff-hl)
 (global-diff-hl-mode)
+(require 'diff-hl-dired)
 (diff-hl-dired-mode)
 ; (global-diff-hl-amend-mode)
 ;; use histogram diff
