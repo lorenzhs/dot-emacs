@@ -1040,7 +1040,7 @@
 
 (require 'lsp)
 (require 'lsp-clients)
-(setq lsp-clients-clangd-executable "/usr/lib/llvm-8/bin/clangd")
+(setq lsp-clients-clangd-executable "/usr/bin/clangd-9")
 
 (require 'company)
 (global-set-key (kbd "M-RET") 'completion-at-point)
