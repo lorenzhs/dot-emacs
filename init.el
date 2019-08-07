@@ -238,6 +238,7 @@
 
 ;; general emacs behaviour extensions
 (push 'ag my-el-get-packages)
+(push 'avy my-el-get-packages)
 (push 'bm my-el-get-packages)
 (push 'clang-format my-el-get-packages)
 (push 'browse-kill-ring my-el-get-packages)
@@ -489,6 +490,10 @@
 
 ;; load ag
 (require 'ag)
+
+;; avy-jump
+(global-set-key (kbd "C-c j") 'avy-goto-char-timer)
+(setq avy-keys '(?u ?i ?a ?e ?o ?s ?n ?r ?t ?d ?y))
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
