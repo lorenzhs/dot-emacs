@@ -487,6 +487,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.capnp$" . capnp-mode))
 
+;; load ag
+(require 'ag)
+
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
