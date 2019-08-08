@@ -59,7 +59,7 @@
     ((java-mode . "java")
      (awk-mode . "awk")
      (other . "k&r"))))
- '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
+ '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0) (inlambda . 0))))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
  '(compilation-always-kill t)
