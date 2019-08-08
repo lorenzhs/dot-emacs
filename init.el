@@ -869,6 +869,9 @@
   ;; hide "mc++fl" minor mode
   (diminish 'modern-c++-font-lock-mode)
 
+  ;; run clang-format on C-tab
+  (local-set-key [(ctrl tab)] 'clang-format-buffer)
+
   ;; ------------------------------------------------------------
   ;; add keywords for Qt code (signals, slots, and some Q_ macros
 
