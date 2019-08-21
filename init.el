@@ -1064,6 +1064,8 @@
 
 (require 'company)
 (global-set-key (kbd "M-RET") 'completion-at-point)
+(global-set-key (kbd "<f12>") 'lsp-find-definition)
+(global-set-key (kbd "<S-f12>") 'lsp-find-references)
 
 (add-hook 'c++-mode-hook 'lsp)
 (add-hook 'c-mode-hook 'lsp)
