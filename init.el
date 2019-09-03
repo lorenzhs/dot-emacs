@@ -1061,6 +1061,7 @@
 (require 'lsp)
 (require 'lsp-clients)
 (setq lsp-clients-clangd-executable "/usr/bin/clangd-9")
+(setq lsp-prefer-flymake :none) ; disable flycheck/flymake
 
 (require 'company)
 (global-set-key (kbd "M-RET") 'completion-at-point)
