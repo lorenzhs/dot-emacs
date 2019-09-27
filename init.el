@@ -872,14 +872,6 @@
 
   ;; run clang-format on C-tab
   (local-set-key [(ctrl tab)] 'clang-format-buffer)
-
-  ;; if a clang-format config exists, run clang-format on save
-  (defun clang-format-buffer-smart ()
-    (when (locate-dominating-file "." ".clang-format")
-      (clang-format-buffer))
-    ;; else evaluate to nil, otherwise the file would be considered already saved
-    nil)
-  (lambda () (add-to-list 'write-file-functions 'clang-format-buffer-smart) )
   ;; use clang-format for region indent
   (when (locate-dominating-file "." ".clang-format")
     (fset 'c-indent-region 'clang-format-region))
