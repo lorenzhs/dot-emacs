@@ -264,6 +264,7 @@
 (push 'yasnippet my-el-get-packages)
 (push 'lsp-mode my-el-get-packages)
 (push 'company-lsp my-el-get-packages)
+(push 'outline-magic my-el-get-packages)
 
 ;(push 'auto-complete my-el-get-packages)
 ;(push 'auto-complete-auctex my-el-get-packages)
@@ -1446,6 +1447,37 @@
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (setq TeX-parse-self t) ; Enable parse on load.
 (setq TeX-auto-save t) ; Enable parse on save.
+
+;; outline mode
+;(global-unset-key "\C-o")
+;(setq outline-minor-mode-prefix "\C-o")
+(add-hook 'LaTeX-mode-hook #'outline-minor-mode)
+;; extra outline headers for fake sections (cf ox-extra's :ignore:)
+(setq TeX-outline-extra
+      '(("%part" 0)
+        ("%chapter" 1)
+        ("%section" 2)
+        ("%subsection" 3)
+        ("%subsubsection" 4)
+        ("%paragraph" 5)
+        ("%subparagraph" 6)))
+;; add font locking to the headers
+(font-lock-add-keywords
+ 'latex-mode
+ '(("^%\\(part\\|chapter\\|\\(sub\\|subsub\\)?section\\|\\(sub\\)?paragraph\\)"
+    0 'font-lock-keyword-face t)
+   ("^%part{\\(.*\\)}"          1 'font-latex-sectioning-0-face t)
+   ("^%chapter{\\(.*\\)}"       1 'font-latex-sectioning-1-face t)
+   ("^%section{\\(.*\\)}"       1 'font-latex-sectioning-2-face t)
+   ("^%subsection{\\(.*\\)}"    1 'font-latex-sectioning-3-face t)
+   ("^%subsubsection{\\(.*\\)}" 1 'font-latex-sectioning-4-face t)
+   ("^%paragraph{\\(.*\\)}"     1 'font-latex-sectioning-5-face t)
+   ("^%subparagraph{\\(.*\\)}"  1 'font-latex-sectioning-5-face t)))
+;;outline-magic
+(eval-after-load 'outline
+  '(progn
+    (require 'outline-magic)
+    (define-key outline-minor-mode-map (kbd "<C-tab>") 'outline-cycle)))
 
 ;; Display time
 (setq display-time-24hr-format t)
