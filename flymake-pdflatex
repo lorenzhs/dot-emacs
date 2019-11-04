@@ -6,7 +6,11 @@ export max_print_line=500
 export error_line=254
 export half_error_line=238
 
-pdflatex -interaction=nonstopmode "$@"
+if [[ "${@: -1}" == dissertation.tex ]]; then
+    lualatex -interaction=nonstopmode "$@"
+else
+    pdflatex -interaction=nonstopmode "$@"
+fi
 
 # check all argument and run bibtex is appropriate
 for f in $@; do
