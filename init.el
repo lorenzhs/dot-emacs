@@ -59,8 +59,12 @@
     ((java-mode . "java")
      (awk-mode . "awk")
      (other . "k&r"))))
- '(c-noise-macro-names '("constexpr"))
- '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0) (inlambda . 0))))
+ '(c-noise-macro-names (quote ("constexpr")))
+ '(c-offsets-alist
+   (quote
+    ((inline-open . 0)
+     (innamespace . 0)
+     (inlambda . 0))))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
  '(compilation-always-kill t)
@@ -116,6 +120,9 @@
  '(ispell-highlight-face (quote flyspell-incorrect))
  '(jde-jdk (quote ("1.7.0.51")))
  '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
+ '(lsp-clients-clangd-executable "/usr/bin/clangd-10")
+ '(lsp-ui-peek-enable nil)
+ '(lsp-ui-sideline-ignore-duplicate t)
  '(lua-indent-level 4)
  '(magit-diff-arguments (quote ("--ignore-all-space")))
  '(magit-git-global-arguments
@@ -264,6 +271,8 @@
 (push 'yasnippet my-el-get-packages)
 (push 'lsp-mode my-el-get-packages)
 (push 'company-lsp my-el-get-packages)
+(push 'lsp-ui my-el-get-packages)
+;(push 'flycheck my-el-get-packages)
 (push 'outline-magic my-el-get-packages)
 
 ;(push 'auto-complete my-el-get-packages)
@@ -336,7 +345,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(lsp-ui-sideline-global ((t (:background "gray8")))))
 
 (load-theme 'grandshell t)
 (load-theme 'mytheme t)
@@ -1052,8 +1061,8 @@
 ;; (setq stack-trace-on-error t)
 
 (require 'lsp)
+(require 'lsp-ui)
 (require 'lsp-clients)
-(setq lsp-clients-clangd-executable "/usr/bin/clangd-9")
 (setq lsp-prefer-flymake :none) ; disable flycheck/flymake
 
 (require 'company)
