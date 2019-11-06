@@ -6,7 +6,8 @@ export max_print_line=500
 export error_line=254
 export half_error_line=238
 
-if [[ "${@: -1}" == dissertation.tex ]]; then
+# if the first five lines of the file contain the string "lualatex", use lualatex
+if head -n5 "${@: -1}" | grep "lualatex"; then
     lualatex -interaction=nonstopmode "$@"
 else
     pdflatex -interaction=nonstopmode "$@"
