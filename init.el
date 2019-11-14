@@ -24,7 +24,7 @@
  '(LaTeX-fold-math-spec-list nil)
  '(TeX-command-list
    (quote
-    (("LaTeX" "latexmk -pdf -synctex=1 %(mode) %s" TeX-run-TeX nil
+    (("LaTeX" "latexmk -pdf -synctex=1 -g %(mode) %s" TeX-run-TeX nil
       (latex-mode doctex-mode)
       :help "Run LaTeX")
      ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
