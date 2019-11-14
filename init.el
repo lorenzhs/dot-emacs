@@ -9,6 +9,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(LaTeX-babel-hyphen "")
+ '(LaTeX-csquotes-close-quote "}")
+ '(LaTeX-csquotes-open-quote "\\enquote{")
  '(LaTeX-fold-env-spec-list
    (quote
     (("[tikzpicture]"
