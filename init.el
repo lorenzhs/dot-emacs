@@ -287,6 +287,7 @@
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
 (push 'openwith my-el-get-packages)
+(push 'ibuffer-vc my-el-get-packages)
 
 ;; text modes
 (push 'auctex my-el-get-packages)
@@ -1403,6 +1404,9 @@
   )
 
 (add-hook 'ibuffer-hook 'my-ibuffer-keys)
+(add-hook 'ibuffer-hook '(lambda ()
+                           (ibuffer-vc-set-filter-groups-by-vc-root)
+                           (ibuffer-auto-mode 1)))
 
 ;; -------------------------------
 ;; --- Less Latency with Tramp ---
