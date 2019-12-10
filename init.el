@@ -350,6 +350,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(diff-refine-added ((t (:inherit magit-diff-added-highlight :background "#22aa22"))))
+ '(diff-refine-removed ((t (:inherit magit-diff-removed-highlight :background "#aa2222"))))
  '(lsp-ui-sideline-global ((t (:background "gray8")))))
 
 (load-theme 'grandshell t)
