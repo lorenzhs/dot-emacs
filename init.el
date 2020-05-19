@@ -115,6 +115,7 @@
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
  '(grep-find-ignored-directories (quote (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
+ '(ibuffer-show-empty-filter-groups nil)
  '(ido-auto-merge-delay-time 0.4)
  '(ido-save-directory-list-file "~/.emacs.d/ido.last")
  '(ido-show-dot-for-dired t)
