@@ -1495,6 +1495,11 @@
    ("^%subsubsection{\\(.*\\)}" 1 'font-latex-sectioning-4-face t)
    ("^%paragraph{\\(.*\\)}"     1 'font-latex-sectioning-5-face t)
    ("^%subparagraph{\\(.*\\)}"  1 'font-latex-sectioning-5-face t)))
+(add-hook
+ 'LaTeX-mode-hook
+ (lambda ()
+   (font-latex-add-keywords '(("posscite" "*[[{")) 'reference)
+   (font-latex-add-keywords '(("citet" "*[[{")) 'reference)))
 ;;outline-magic
 (eval-after-load 'outline
   '(progn
