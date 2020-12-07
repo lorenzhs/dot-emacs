@@ -124,7 +124,7 @@
  '(ispell-highlight-face (quote flyspell-incorrect))
  '(jde-jdk (quote ("1.7.0.51")))
  '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
- '(lsp-clients-clangd-executable "/usr/bin/clangd-10")
+ '(lsp-clients-clangd-executable "/usr/bin/clangd-11")
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-ignore-duplicate t)
  '(lua-indent-level 4)
