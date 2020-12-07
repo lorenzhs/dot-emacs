@@ -312,7 +312,7 @@
 (push 'thrift-mode my-el-get-packages)
 (push 'tt-mode my-el-get-packages)
 (push 'rust-mode my-el-get-packages)
-(push 'wikitext-mode my-el-get-packages)
+;(push 'wikitext-mode my-el-get-packages)
 ;(push 'csharp-mode my-el-get-packages)
 
 ;; version control
@@ -537,7 +537,7 @@
 ;(autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
-(add-to-list 'auto-mode-alist '("\\.wiki\\'" . wikitext-mode))
+;(add-to-list 'auto-mode-alist '("\\.wiki\\'" . wikitext-mode))
 
 ; doxygen mode
 (defun my-dox-mode ()
