@@ -1,3 +1,6 @@
+*.lsp-session*
+session.*
+/transient/history.el
 projects.ede
 semanticdb
 eshell
