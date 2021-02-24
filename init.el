@@ -274,7 +274,7 @@
 (push 'ws-butler my-el-get-packages)
 (push 'yasnippet my-el-get-packages)
 (push 'lsp-mode my-el-get-packages)
-(push 'company-lsp my-el-get-packages)
+(push 'company-mode my-el-get-packages)
 (push 'lsp-ui my-el-get-packages)
 ;(push 'flycheck my-el-get-packages)
 (push 'outline-magic my-el-get-packages)
@@ -1075,7 +1075,7 @@
 (require 'lsp-clients)
 (setq lsp-prefer-flymake :none) ; disable flycheck/flymake
 
-(require 'company)
+(require 'company-capf)
 (global-set-key (kbd "M-RET") 'completion-at-point)
 (global-set-key (kbd "<f12>") 'lsp-find-definition)
 (global-set-key (kbd "<S-f12>") 'lsp-find-references)
