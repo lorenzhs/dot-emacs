@@ -106,7 +106,7 @@
      ("crefrange" "[{")
      ("Crefrange" "[{"))))
  '(fringe-mode (quote (nil . 0)) nil (fringe))
- '(gc-cons-threshold 20000000)
+ '(gc-cons-threshold 100000000) ;; 100mb, for lsp-mode
  '(gdb-many-windows t)
  '(ggtags-highlight-tag 10000.0)
  '(ggtags-highlight-tag-delay 10000.0)
@@ -162,6 +162,7 @@
      ("melpa" . "https://melpa.org/packages/")
      ("marmalade" . "https://marmalade-repo.org/packages/"))))
  '(package-selected-packages (quote (let-alist)))
+ '(read-process-output-max (* 1024 1024)) ;; 1mb, for lsp-mode
  '(reftex-default-bibliography (quote ("~/docs/library.bib")))
  '(reftex-ref-style-default-list (quote ("Cleveref")))
  '(replace-lax-whitespace t)
