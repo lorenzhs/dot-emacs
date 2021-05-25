@@ -413,19 +413,6 @@
   "A mode for structured wiki-like notes"
 )
 
-;; --- autoload dokuwiki editing mode ---
-
-;; (global-unset-key [(control v)])
-
-;; (autoload 'dokuwiki-mode "dokuwiki" "DokuWiki Mode" t)
-;; (autoload 'dokuwiki-get-page "dokuwiki" "DokuWiki Mode" t)
-
-;; (global-set-key [(control v)(control d)] 'dokuwiki-get-page)
-
-;; (setq dokuwiki-username "Timo"
-;;       dokuwiki-password "test"
-;;       dokuwiki-base-url "idlebox.net/dw")
-
 ;; --- org-mode customizations ---
 
 (add-hook 'org-mode-hook
