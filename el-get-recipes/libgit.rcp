@@ -1,0 +1,4 @@
+(:name libgit
+       :description "Thin bindings to libgit2."
+       :type elpa
+       :repo ("melpa" . "https://melpa.org/packages/"))
