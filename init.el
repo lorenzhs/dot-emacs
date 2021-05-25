@@ -13,18 +13,16 @@
  '(LaTeX-csquotes-close-quote "}")
  '(LaTeX-csquotes-open-quote "\\enquote{")
  '(LaTeX-fold-env-spec-list
-   (quote
-    (("[tikzpicture]"
+   '(("[tikzpicture]"
       ("tikzpicture"))
      ("[algorithm]"
       ("algorithm"))
      ("[algorithm2e]"
-      ("algorithm2e")))))
+      ("algorithm2e"))))
  '(LaTeX-fold-macro-spec-list nil)
  '(LaTeX-fold-math-spec-list nil)
  '(TeX-command-list
-   (quote
-    (("LaTeX" "latexmk -pdf -synctex=1 -g %(mode) %s" TeX-run-TeX nil
+   '(("LaTeX" "latexmk -pdf -synctex=1 -g %(mode) %s" TeX-run-TeX nil
       (latex-mode doctex-mode)
       :help "Run LaTeX")
      ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
@@ -35,39 +33,28 @@
      ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer")
      ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
      ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
-     ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+     ("Other" "" TeX-run-command t t :help "Run an arbitrary command")))
  '(TeX-fold-env-spec-list nil)
  '(TeX-fold-macro-spec-list nil)
  '(TeX-fold-math-spec-list nil)
  '(TeX-save-query nil)
  '(TeX-source-correlate-mode t)
  '(ag-highlight-search t)
- '(ag-ignore-list (quote ("build" "b" "bo" "extlib")))
+ '(ag-ignore-list '("build" "b" "bo" "extlib"))
  '(ag-reuse-buffers t)
  '(ag-reuse-window t)
- '(auth-sources
-   (quote
-    ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
+ '(auth-sources '("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc"))
  '(auto-save-interval 3000)
  '(auto-save-timeout 60)
  '(bibtex-comma-after-last-field t)
  '(bibtex-entry-format
-   (quote
-    (opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields)))
- '(bibtex-maintain-sorted-entries (quote crossref))
+   '(opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields))
+ '(bibtex-maintain-sorted-entries 'crossref)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
- '(c-default-style
-   (quote
-    ((java-mode . "java")
-     (awk-mode . "awk")
-     (other . "k&r"))))
- '(c-noise-macro-names (quote ("constexpr")))
- '(c-offsets-alist
-   (quote
-    ((inline-open . 0)
-     (innamespace . 0)
-     (inlambda . 0))))
+ '(c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "k&r")))
+ '(c-noise-macro-names '("constexpr"))
+ '(c-offsets-alist '((inline-open . 0) (innamespace . 0) (inlambda . 0)))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
  '(compilation-always-kill t)
@@ -80,33 +67,31 @@
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
  '(custom-safe-themes
-   (quote
-    ("a38397ce1d9a29a964198d8d60830b43de146feec772f32980aa436d13b74d9a" default)))
+   '("a38397ce1d9a29a964198d8d60830b43de146feec772f32980aa436d13b74d9a" default))
  '(dired-dwim-target t)
  '(diredp-hide-details-initially-flag nil)
  '(diredp-image-preview-in-tooltip nil)
  '(doc-view-continuous t)
  '(ecb-options-version "2.40")
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
- '(ede-project-directories (quote ("/home/lorenz/docs/notes/commEffAlg")))
+ '(ecb-primary-secondary-mouse-buttons 'mouse-1--mouse-2)
+ '(ede-project-directories '("/home/lorenz/docs/notes/commEffAlg"))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(ediff-autostore-merges t)
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
  '(font-latex-match-reference-keywords
-   (quote
-    (("printbibliography" "[{")
+   '(("printbibliography" "[{")
      ("addbibresource" "[{")
      ("autoref" "[{")
      ("cref" "[{")
      ("Cref" "[{")
      ("crefrange" "[{")
-     ("Crefrange" "[{"))))
- '(fringe-mode (quote (nil . 0)) nil (fringe))
- '(gc-cons-threshold 100000000) ;; 100mb, for lsp-mode
+     ("Crefrange" "[{")))
+ '(fringe-mode '(nil . 0) nil (fringe))
+ '(gc-cons-threshold 100000000)
  '(gdb-many-windows t)
  '(ggtags-highlight-tag 10000.0)
  '(ggtags-highlight-tag-delay 10000.0)
@@ -114,91 +99,82 @@
  '(git-commit-summary-max-length 60)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
- '(grep-find-ignored-directories (quote (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
+ '(grep-find-ignored-directories '(".svn" ".git" ".hg" ".bzr" "extlib" "b" "build"))
  '(ibuffer-show-empty-filter-groups nil)
  '(ido-auto-merge-delay-time 0.4)
  '(ido-save-directory-list-file "~/.emacs.d/ido.last")
  '(ido-show-dot-for-dired t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(ispell-highlight-face (quote flyspell-incorrect))
- '(jde-jdk (quote ("1.7.0.51")))
- '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
+ '(ispell-highlight-face 'flyspell-incorrect)
+ '(jde-jdk '("1.7.0.51"))
+ '(jde-jdk-registry '(("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/")))
  '(lsp-clients-clangd-executable "/usr/bin/clangd-11")
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-ignore-duplicate t)
  '(lua-indent-level 4)
- '(magit-diff-arguments (quote ("--ignore-all-space")))
+ '(magit-diff-arguments '("--ignore-all-space"))
  '(magit-git-global-arguments
-   (quote
-    ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true")))
- '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
- '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
+   '("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true"))
+ '(magit-log-arguments '("--graph" "--color" "--decorate" "-n100"))
+ '(magit-no-confirm '(stage-all-changes unstage-all-changes))
  '(magit-pull-arguments nil)
- '(magit-refs-show-commit-count (quote all))
- '(magit-status-buffer-switch-function (quote switch-to-buffer))
+ '(magit-refs-show-commit-count 'all)
+ '(magit-status-buffer-switch-function 'switch-to-buffer)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
- '(org-agenda-files (quote ("~/docs/notes/todo.org")))
- '(org-clock-mode-line-total (quote today))
+ '(org-agenda-files '("~/docs/notes/todo.org"))
+ '(org-clock-mode-line-total 'today)
  '(org-clock-persist t)
  '(org-confirm-shell-link-function nil)
  '(org-export-allow-bind-keywords t)
- '(org-export-backends (quote (ascii html latex md)))
+ '(org-export-backends '(ascii html latex md))
  '(org-link-frame-setup
-   (quote
-    ((vm . vm-visit-folder-other-frame)
+   '((vm . vm-visit-folder-other-frame)
      (vm-imap . vm-visit-imap-folder-other-frame)
      (gnus . org-gnus-no-new-news)
      (file . find-file)
-     (wl . wl-other-frame))))
+     (wl . wl-other-frame)))
+ '(org-link-shell-confirm-function nil)
  '(org-tab-follows-link t)
  '(org-time-clocksum-format
-   (quote
-    (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
+   '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
  '(package-archives
-   (quote
-    (("gnu" . "https://elpa.gnu.org/packages/")
+   '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")
-     ("marmalade" . "https://marmalade-repo.org/packages/"))))
- '(package-selected-packages (quote (let-alist)))
- '(read-process-output-max (* 1024 1024)) ;; 1mb, for lsp-mode
- '(reftex-default-bibliography (quote ("~/docs/library.bib")))
- '(reftex-ref-style-default-list (quote ("Cleveref")))
+     ("marmalade" . "https://marmalade-repo.org/packages/")))
+ '(package-selected-packages '(libgit let-alist))
+ '(read-process-output-max (* 1024 1024) t)
+ '(reftex-default-bibliography '("~/docs/library.bib"))
+ '(reftex-ref-style-default-list '("Cleveref"))
  '(replace-lax-whitespace t)
  '(replace-regexp-lax-whitespace t)
  '(safe-local-variable-values
-   (quote
-    ((eval add-to-list
-           (make-variable-buffer-local
-            (quote LaTeX-fold-math-spec-list))
-           (quote
-            ("[tabular]"
-             ("tabular"))))
+   '((eval add-to-list
+           (make-variable-buffer-local 'LaTeX-fold-math-spec-list)
+           '("[tabular]"
+             ("tabular")))
      (c-tab-always-indent . t)
      (nxml-child-indent . 4)
      (rebox-min-fill-column . 100)
      (rebox-min-fill-column . 110)
-     (rebox-min-fill-column . 120))))
- '(scroll-bar-mode (quote right))
- '(search-whitespace-regexp "[ \t\r\n]+")
+     (rebox-min-fill-column . 120)))
+ '(scroll-bar-mode 'right)
+ '(search-whitespace-regexp "[ 	
+]+")
  '(sieve-manage-default-port "4190")
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-default-method "scp")
- ;; '(tramp-remote-path
- ;;   (quote
- ;;    ("~/bin/" "~/local/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin")))
  '(tramp-remote-process-environment
-   (quote
-    ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
+   '("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct="))
  '(tramp-ssh-controlmaster-options "" t)
  '(tramp-use-ssh-controlmaster-options t)
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
- '(vc-handled-backends (quote (git svn))))
+ '(vc-handled-backends '(git svn)))
 
 ;; ---------------------------
 ;; --- change default font ---
