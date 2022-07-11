@@ -231,7 +231,7 @@
 (push 'browse-kill-ring my-el-get-packages)
 (push 'column-marker my-el-get-packages)
 (push 'diminish my-el-get-packages)
-(push 'flymake my-el-get-packages)
+;(push 'flymake my-el-get-packages)
 (push 'folding my-el-get-packages)
 (push 'ggtags my-el-get-packages)
 ;(push 'google-this my-el-get-packages)
@@ -719,47 +719,6 @@
         ("algorithm" ?a "alg:" "~\\ref{%s}" t   ("algorithm" "alg") -2)
         ))
 
-;; --------------------
-;; --- flymake mode ---
-;; --------------------
-
-(eval-after-load "flymake"
-  '(progn
-     ;; compile tex using pdflatex
-     (defun flymake-get-tex-args (file-name)
-       (list "~/.emacs.d/flymake-pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
-
-     ;; severe logging
-     ;(setq flymake-log-level 9)
-
-     ;; changes timeout
-     (setq flymake-no-changes-timeout 5)
-
-     ;; dont run on enters
-     (setq flymake-start-syntax-check-on-newline nil)
-
-     ;; scan complete files for matching include lines
-     (setq flymake-check-file-limit nil)
-
-     ;; fixes unbalanced braces in LaTeX files
-     (push '("^\\(.*?\.tex\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
-     (push '("^\\(.*?\.tikz\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
-     (push '("Runaway argument?" nil nil nil) flymake-err-line-patterns)
-     (push '("Emergency stop." nil nil nil) flymake-err-line-patterns)
-     (push '("Package tikz Error:" nil nil nil) flymake-err-line-patterns)
-
-     ;; disable master search for numeric endings
-     (setq flymake-allowed-file-name-masks
-           (delete '("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
-                   flymake-allowed-file-name-masks)) ; don't use multipart tex files
-
-     ;; enable master search for -fig.tex endings
-     (add-to-list 'flymake-allowed-file-name-masks
-                  '("fig\\.tex\\'" flymake-master-tex-init flymake-master-cleanup))
-
-     (add-to-list 'flymake-allowed-file-name-masks
-                  '("\\.tikz\\'" flymake-master-tex-init flymake-master-cleanup))
-     ))
 
 ;; -----------------------------
 ;; --- bm line bookmark mode ---
