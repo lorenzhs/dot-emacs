@@ -107,8 +107,6 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face 'flyspell-incorrect)
- '(jde-jdk '("1.7.0.51"))
- '(jde-jdk-registry '(("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/")))
  '(lsp-clients-clangd-executable "/usr/bin/clangd-14")
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-ignore-duplicate t)
@@ -855,10 +853,10 @@
   (diminish 'modern-c++-font-lock-mode)
 
   ;; run clang-format on C-tab
-  (local-set-key [(ctrl tab)] 'clang-format-buffer)
+  (local-set-key [(ctrl tab)] 'lsp-format-buffer)
   ;; use clang-format for region indent
   (when (locate-dominating-file "." ".clang-format")
-    (fset 'c-indent-region 'clang-format-region))
+    (fset 'c-indent-region 'lsp-format-region))
 
   ;; ------------------------------------------------------------
   ;; add keywords for Qt code (signals, slots, and some Q_ macros
@@ -1036,7 +1034,7 @@
 
 (require 'lsp)
 (require 'lsp-ui)
-(require 'lsp-clients)
+;(require 'lsp-clients)
 (setq lsp-prefer-flymake :none) ; disable flycheck/flymake
 
 (require 'company-capf)
