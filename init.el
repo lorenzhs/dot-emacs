@@ -253,6 +253,7 @@
 (push 'lsp-ui my-el-get-packages)
 ;(push 'flycheck my-el-get-packages)
 (push 'outline-magic my-el-get-packages)
+(push 'projectile my-el-get-packages)
 
 ;(push 'auto-complete my-el-get-packages)
 ;(push 'auto-complete-auctex my-el-get-packages)
@@ -475,6 +476,13 @@
 ;; avy-jump
 (global-set-key (kbd "C-c j") 'avy-goto-char-timer)
 (setq avy-keys '(?u ?i ?a ?e ?o ?s ?n ?r ?t ?d ?y))
+
+; projectile mode
+(require 'projectile)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(setq projectile-project-search-path '("~/code/"))
+(setq projectile-git-submodule-command nil) ; disable recursing into submodules
+(projectile-global-mode)
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
