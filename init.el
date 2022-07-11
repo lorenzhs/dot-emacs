@@ -852,10 +852,10 @@
 
 (add-hook 'c-mode-common-hook 'tb-c-common-hook)
 
-;; mark 80th column on some modes
+;; mark 100th column on some modes
 
-(add-hook 'c-mode-common-hook (lambda () (column-marker-1 80)))
-(add-hook 'cmake-mode-hook (lambda () (column-marker-1 80)))
+(add-hook 'c-mode-common-hook (lambda () (column-marker-1 100)))
+(add-hook 'cmake-mode-hook (lambda () (column-marker-1 100)))
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
