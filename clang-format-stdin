@@ -1,0 +1,6 @@
+#!/usr/bin/zsh
+
+TMPFN=$(mktemp /tmp/clangformatstdin.XXXXXX)
+cat - > ${TMPFN}
+clang-format-14 $* ${TMPFN}
+rm ${TMPFN}

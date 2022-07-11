@@ -1521,27 +1521,12 @@ before we send our 'ok' to the SessionManager."
 
 
 ;; clang-format for textproto snippets
-(defun apply-function-to-region (fn)
-  (interactive "XFunction to apply to region: ")
-  (save-excursion
-    (let* ((beg (region-beginning))
-           (end (region-end))
-           (resulting-text
-            (funcall
-             fn
-             (buffer-substring-no-properties beg end))))
-      (kill-region beg end)
-      (insert resulting-text))))
-
-(defun clang-format-textproto-string (string)
-  (with-temp-buffer
-    (insert string)
-    (clang-format-buffer nil "foo.textproto")
-    (buffer-string)))
-
-(defun cf-textproto ()
-  (interactive)
-  (apply-function-to-region 'clang-format-textproto-string))
+(defun cf-textproto (beg end)
+  (interactive "r")
+  (shell-command-on-region
+   beg end
+   "~/.emacs.d/clang-format-stdin --assume-filename=foo.textproto"
+   t t))
 
 ;; open master file
 ;(find-file "~/docs/notes/todo.org")
