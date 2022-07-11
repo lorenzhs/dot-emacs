@@ -1,0 +1,4 @@
+(:name sql-indent
+       :description "Pretty-print sql"
+       :type elpa
+       :repo ("elpa" . "https://elpa.gnu.org/packages"))

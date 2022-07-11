@@ -141,7 +141,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")
      ("marmalade" . "https://marmalade-repo.org/packages/")))
- '(package-selected-packages '(libgit let-alist))
+ '(package-selected-packages '(sql-indent libgit let-alist))
  '(read-process-output-max (* 1024 1024) t)
  '(reftex-default-bibliography '("~/docs/library.bib"))
  '(reftex-ref-style-default-list '("Cleveref"))
@@ -251,8 +251,9 @@
 (push 'lsp-mode my-el-get-packages)
 (push 'company-mode my-el-get-packages)
 (push 'lsp-ui my-el-get-packages)
-;(push 'flycheck my-el-get-packages)
+(push 'flycheck my-el-get-packages)
 (push 'outline-magic my-el-get-packages)
+(push 'transpose-frame my-el-get-packages)
 (push 'projectile my-el-get-packages)
 (push 'flx my-el-get-packages)
 
@@ -1346,6 +1347,14 @@
 (add-hook 'ibuffer-hook '(lambda ()
                            (ibuffer-vc-set-filter-groups-by-vc-root)
                            (ibuffer-auto-mode 1)))
+
+;; SQL pretty printing
+(defun sqlparse-region (beg end)
+  (interactive "r")
+  (shell-command-on-region
+   beg end
+   "python3 -c 'import sys, sqlparse; print(sqlparse.format(sys.stdin.read(), reindent=True))'"
+   t t))
 
 ;; -------------------------------
 ;; --- Less Latency with Tramp ---
