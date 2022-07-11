@@ -1,3 +1,4 @@
+.cache
 *.lsp-session*
 session.*
 /transient/history.el
