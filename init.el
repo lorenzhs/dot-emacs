@@ -254,6 +254,7 @@
 ;(push 'flycheck my-el-get-packages)
 (push 'outline-magic my-el-get-packages)
 (push 'projectile my-el-get-packages)
+(push 'flx my-el-get-packages)
 
 ;(push 'auto-complete my-el-get-packages)
 ;(push 'auto-complete-auctex my-el-get-packages)
@@ -1028,6 +1029,12 @@
 (require 'ido-completing-read+)
 (ido-ubiquitous-mode 1)
 (setq magit-completing-read-function 'magit-ido-completing-read)
+
+; flx-ido mode for better matching
+(flx-ido-mode t)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 
 ; configure smex
 (smex-initialize)
