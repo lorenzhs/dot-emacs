@@ -109,7 +109,7 @@
  '(ispell-highlight-face 'flyspell-incorrect)
  '(jde-jdk '("1.7.0.51"))
  '(jde-jdk-registry '(("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/")))
- '(lsp-clients-clangd-executable "/usr/bin/clangd-11")
+ '(lsp-clients-clangd-executable "/usr/bin/clangd-14")
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-ignore-duplicate t)
  '(lua-indent-level 4)
@@ -298,13 +298,13 @@
 (push 'magit-svn my-el-get-packages)
 (push 'diff-hl my-el-get-packages)
 
+(push 'projectile my-el-get-packages)
+
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
 ;(push 'bbdb my-el-get-packages)
 ;(push 'tc my-el-get-packages ) ;; trivial cite
 ;(push 'gnus-notify my-el-get-packages)
-
-(push 'spotify.el my-el-get-packages)
 
 ;; END PACKAGE LIST for el-get
 
@@ -1493,6 +1493,11 @@
 (setq require-final-newline t
       load-prefer-newer t
       mouse-yank-at-point t)
+
+(projectile-mode +1)
+;; Recommended keymap prefix on Windows/Linux
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(setq projectile-git-submodule-command "")
 
 ;;; DEAL WITH GNOME INTEGRATION
 ;;; save & shutdown when we get an "end of session" signal on dbus
