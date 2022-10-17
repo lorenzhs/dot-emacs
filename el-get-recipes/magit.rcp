@@ -5,8 +5,7 @@
        :pkgname "magit/magit"
        :branch "master"
        :minimum-emacs-version "25.1"
-       :depends (dash transient with-editor emacs-async ghub libgit)
-       :info "Documentation"
+       :depends (dash transient with-editor emacs-async ghub)
        :load-path "lisp/"
        :compile "lisp/"
        ;; Use the Makefile to produce the info manual, el-get can
