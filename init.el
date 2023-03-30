@@ -3,7 +3,10 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;(package-initialize)
-
+(setq mac-option-modifier 'none)
+  (setq ns-right-alternate-modifier nil)
+  (setq ns-alternate-modifier 'meta)
+  (global-set-key (kbd " ") " ")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -184,7 +187,11 @@
 ;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
 
 ;(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
-(set-face-font 'default "-*-inconsolata-medium-r-*-*-17-*-*-*-*-*-*-*")
+(if
+    (string= system-type "darwin")
+    (set-face-font 'default "-*-inconsolata-medium-r-*-*-16-*-*-*-*-*-*-*")
+    (set-face-font 'default "-*-inconsolata-medium-r-*-*-17-*-*-*-*-*-*-*"))
+
 
 ;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
 
@@ -1316,9 +1323,11 @@
       ;; if buffer is under tramp
       (file-remote-p default-directory)
       (shell)
-    (start-process "terminal" nil "gnome-terminal")
-    ;(call-process "gnome-terminal" nil 0 nil)
-    )
+    (if
+        (string= system-type "darwin")
+        (start-process "terminal" nil "open" "-a" "iterm" default-directory)
+      (start-process "terminal" nil "gnome-terminal"))
+  )
 )
 
 (defun my-file-manager (&optional arg)
@@ -1328,7 +1337,10 @@
       ;; if buffer is under tramp
       (file-remote-p default-directory)
       (dired default-directory)
-    (start-process "file-manager" nil "xdg-open" default-directory)
+    (if
+        (string= system-type "darwin")
+        (start-process "file-manager" nil "open" default-directory)
+      (start-process "file-manager" nil "xdg-open" default-directory))
     ;;(call-process "xdg-open" nil 0 nil default-directory)
     )
 )
@@ -1528,6 +1540,8 @@ before we send our 'ok' to the SessionManager."
  "/org/gnome/SessionManager"
  "org.gnome.SessionManager" "RegisterClient" 'my-register-signals
  "Emacs server" (getenv "DESKTOP_AUTOSTART_ID"))
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
 
 
 ;; clang-format for textproto snippets
