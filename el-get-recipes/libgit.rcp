@@ -1,0 +1,4 @@
+(:name libgit
+       :type github
+       :pkgname "magit/libegit2"
+       )
