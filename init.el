@@ -395,23 +395,23 @@
 
 (add-hook 'org-mode-hook
           (lambda ()
-            (require 'ox-bibtex)
-            (require 'ox-extra)
-            (ox-extras-activate '(ignore-headlines))
+            ;(require 'ox-bibtex)
+            ;(require 'ox-extra)
+            ;(ox-extras-activate '(ignore-headlines))
             (setq org-latex-pdf-process (list "latexmk -f -pdf %f"))
-            (local-unset-key [(meta shift up)])
-            (local-unset-key [(meta shift down)])
-            (local-set-key [(control shift up)] 'org-move-subtree-up)
-            (local-set-key [(control shift down)] 'org-move-subtree-down)
-            (local-set-key [(control shift left)] 'org-promote-subtree)
-            (local-set-key [(control shift right)] 'org-demote-subtree)
-            (local-set-key [(control return)] 'org-insert-subheading)
+            ;(local-unset-key [(meta shift up)])
+            ;(local-unset-key [(meta shift down)])
+            ;(local-set-key [(control shift up)] 'org-move-subtree-up)
+            ;(local-set-key [(control shift down)] 'org-move-subtree-down)
+            ;(local-set-key [(control shift left)] 'org-promote-subtree)
+            ;(local-set-key [(control shift right)] 'org-demote-subtree)
+            ;(local-set-key [(control return)] 'org-insert-subheading)
             ))
 
-(setq org-default-notes-file "~/synca/01-OrgTassen/TODO.org")
+(setq org-default-notes-file "~/docs/notes/todo.org")
 
-(global-set-key (kbd "<f1>") 'org-todo-list)
-(global-set-key (kbd "\C-cc") 'org-capture)
+;(global-set-key (kbd "<f1>") 'org-todo-list)
+;(global-set-key (kbd "\C-cc") 'org-capture)
 
 ;; active Babel languages
 (org-babel-do-load-languages
@@ -612,7 +612,7 @@
 (add-hook 'magit-mode-hook 'magit-load-config-extensions)
 
 ;; Git-Commit-Mode: flyspell
-(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+(add-hook 'git-commit-mode-hook 'turn-on-flyspell) ()
 
 ; svn integration
 
