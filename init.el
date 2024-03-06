@@ -299,8 +299,6 @@
 (push 'magit-svn my-el-get-packages)
 (push 'diff-hl my-el-get-packages)
 
-(push 'projectile my-el-get-packages)
-
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
 ;(push 'bbdb my-el-get-packages)
@@ -484,6 +482,15 @@
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-project-search-path '("~/code/"))
 (setq projectile-git-submodule-command nil) ; disable recursing into submodules
+
+;; https://github.com/bbatsov/projectile/issues/554#issuecomment-236030317
+;; Make the file list creation faster by NOT calling `projectile-get-sub-projects-files'
+(defun modi/advice-projectile-no-sub-project-files ()
+  "Directly call `projectile-get-ext-command'. No need to try to get a
+        list of sub-project files if the vcs is git."
+  (projectile-files-via-ext-command (projectile-get-ext-command)))
+(advice-add 'projectile-get-repo-files :override #'modi/advice-projectile-no-sub-project-files)
+
 (projectile-global-mode)
 
 ;; -------------------------------
