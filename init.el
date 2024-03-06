@@ -107,9 +107,12 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face 'flyspell-incorrect)
- '(lsp-clients-clangd-executable "/usr/bin/clangd-14")
+ '(lsp-clients-clangd-executable "/usr/bin/clangd-17")
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-ignore-duplicate t)
+ '(lsp-ui-sideline-show-code-actions t)
+ '(lsp-ui-sideline-show-diagnostics t)
+ '(lsp-ui-sideline-show-hover nil)
  '(lua-indent-level 4)
  '(magit-diff-arguments '("--ignore-all-space"))
  '(magit-git-global-arguments
