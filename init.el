@@ -614,10 +614,6 @@
 
 (global-set-key (kbd "<C-f12>") 'magit-status)
 
-;; auto-load magit extensions when configured in the repo
-;; (for svn, this is `git config --add magit.extension svn`)
-(add-hook 'magit-mode-hook 'magit-load-config-extensions)
-
 ;; Git-Commit-Mode: flyspell
 (add-hook 'git-commit-mode-hook 'turn-on-flyspell) ()
 
@@ -1271,7 +1267,7 @@
   "Try to ensure that my keybindings always have priority."
   (if (not (eq (car (car minor-mode-map-alist)) 'my-keymap-mode))
       (let ((mykeys (assq 'my-keymap-mode minor-mode-map-alist)))
-        (assq-delete-all 'my-keymap-mode minor-mode-map-alist)
+        (setq minor-mode-map-alist (assq-delete-all 'my-keymap-mode minor-mode-map-alist))
         (add-to-list 'minor-mode-map-alist mykeys))))
 (ad-activate 'load)
 
