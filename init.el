@@ -110,7 +110,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face 'flyspell-incorrect)
- '(lsp-clients-clangd-executable "/usr/bin/clangd-17")
+ '(lsp-clients-clangd-executable "/usr/bin/clangd-18")
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-ignore-duplicate t)
  '(lsp-ui-sideline-show-code-actions t)
