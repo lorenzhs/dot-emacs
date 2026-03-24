@@ -491,16 +491,9 @@
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-project-search-path '("~/code/"))
+(setq projectile-indexing-method 'alien)    ; delegate entirely to git ls-files, fastest
 (setq projectile-git-submodule-command nil) ; disable recursing into submodules
-
-;; https://github.com/bbatsov/projectile/issues/554#issuecomment-236030317
-;; Make the file list creation faster by NOT calling `projectile-get-sub-projects-files'
-(defun modi/advice-projectile-no-sub-project-files ()
-  "Directly call `projectile-get-ext-command'. No need to try to get a
-        list of sub-project files if the vcs is git."
-  (projectile-files-via-ext-command (projectile-get-ext-command)))
-(advice-add 'projectile-get-repo-files :override #'modi/advice-projectile-no-sub-project-files)
-
+(setq projectile-enable-caching t)          ; enable caching of project file lists
 (projectile-global-mode)
 
 ;; -------------------------------
@@ -1493,10 +1486,6 @@
       load-prefer-newer t
       mouse-yank-at-point t)
 
-(projectile-mode +1)
-;; Recommended keymap prefix on Windows/Linux
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(setq projectile-git-submodule-command "")
 
 ;;; DEAL WITH GNOME INTEGRATION
 ;;; save & shutdown when we get an "end of session" signal on dbus
