@@ -247,7 +247,10 @@
 ;(push 'google-this my-el-get-packages)
 (push 'goto-last-change my-el-get-packages)
 (push 'grandshell my-el-get-packages)
-(push 'ido-completing-read-plus my-el-get-packages)
+;(push 'ido-completing-read-plus my-el-get-packages)
+(push 'compat my-el-get-packages)
+(push 'vertico my-el-get-packages)
+(push 'orderless my-el-get-packages)
 (push 'iedit my-el-get-packages)
 (push 'leuven-theme my-el-get-packages)
 (push 'multiple-cursors my-el-get-packages)
@@ -493,7 +496,7 @@
 (setq projectile-project-search-path '("~/code/"))
 (setq projectile-indexing-method 'alien)    ; delegate entirely to git ls-files, fastest
 (setq projectile-git-submodule-command nil) ; disable recursing into submodules
-(setq projectile-enable-caching t)          ; enable caching of project file lists
+; (setq projectile-enable-caching t)          ; enable caching of project file lists
 (projectile-global-mode)
 
 ;; -------------------------------
@@ -1020,28 +1023,24 @@
 (add-hook 'c++-mode-hook 'lsp)
 (add-hook 'c-mode-hook 'lsp)
 
-;; --------------------
-;; --- ido and smex ---
-;; --------------------
+;; --------------------------
+;; --- vertico + orderless ---
+;; --------------------------
 
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(add-to-list 'ido-ignore-files "\.synctex\.gz")
-; org before tex before pdf before others
-(setq ido-file-extensions-order '(".org" ".tex" ".pdf"))
+(require 'compat)
+(add-to-list 'load-path "~/.emacs.d/el-get/vertico/extensions")
+(require 'vertico)
+(vertico-mode)
+(require 'vertico-flat)
+(vertico-flat-mode)
+(require 'vertico-directory)
+(keymap-set vertico-map "DEL" #'vertico-directory-up)
+(keymap-set vertico-map "RET" #'vertico-directory-enter)
+(add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
 
-; enable ido everywhere
-(require 'ido-completing-read+)
-(ido-ubiquitous-mode 1)
-(setq magit-completing-read-function 'magit-ido-completing-read)
-
-; flx-ido mode for better matching
-(flx-ido-mode t)
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
+(require 'orderless)
+(setq completion-styles '(orderless basic)
+      completion-category-overrides '((file (styles basic partial-completion))))
 
 ; configure smex
 (smex-initialize)

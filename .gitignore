@@ -20,3 +20,4 @@ GRTAGS
 GTAGS
 /url/
 *.pyc
+projectile.cache
