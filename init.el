@@ -1036,13 +1036,14 @@
 (require 'vertico-flat)
 (vertico-flat-mode)
 (require 'vertico-directory)
-(keymap-set vertico-map "DEL" #'vertico-directory-up)
+(keymap-set vertico-map "DEL" #'vertico-directory-delete-char)
 (keymap-set vertico-map "RET" #'vertico-directory-enter)
 (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
 
 (require 'orderless)
 (setq completion-styles '(orderless basic)
-      completion-category-overrides '((file (styles basic partial-completion))))
+      completion-category-overrides '((file (styles basic partial-completion)))
+      orderless-matching-styles '(orderless-regexp orderless-flex))
 
 ; configure smex
 (smex-initialize)
