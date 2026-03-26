@@ -118,12 +118,14 @@
  '(lsp-ui-sideline-show-hover nil)
  '(lua-indent-level 4)
  '(magit-diff-arguments '("--ignore-all-space"))
+ '(magit-diff-refine-hunk 'selected)
  '(magit-git-global-arguments
    '("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true"))
  '(magit-log-arguments '("--graph" "--color" "--decorate" "-n100"))
  '(magit-no-confirm '(stage-all-changes unstage-all-changes))
+ '(magit-git-executable "/usr/bin/git")
  '(magit-pull-arguments nil)
- '(magit-refs-show-commit-count 'all)
+ '(magit-refs-show-commit-count nil) ; used to be 'all
  '(magit-status-buffer-switch-function 'switch-to-buffer)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
