@@ -529,6 +529,9 @@
 ; rust
 ;(autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+; rust-analyzer expects cargo.extraEnv as a JSON object, but lsp-mode defaults
+; to an empty vector which serializes as []. Use a hash-table ({}) instead.
+(setq lsp-rust-analyzer-cargo-extra-env (make-hash-table))
 
 ;(add-to-list 'auto-mode-alist '("\\.wiki\\'" . wikitext-mode))
 
