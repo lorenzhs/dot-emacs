@@ -189,10 +189,16 @@
 ;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
 
 ;(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
-(if
-    (string= system-type "darwin")
-    (set-face-font 'default "-*-inconsolata-medium-r-*-*-16-*-*-*-*-*-*-*")
-    (set-face-font 'default "-*-inconsolata-medium-r-*-*-17-*-*-*-*-*-*-*"))
+(if (find-font (font-spec :name "JetBrains Mono"))
+    (let ((size (if (string= system-type "darwin") 9.5 10.5)))
+      (set-face-attribute 'default nil
+                          :family "JetBrains Mono"
+                          :weight 'regular
+                          :height (round (* size 10))))
+  ;; fall back to Inconsolata if JetBrains Mono isn't installed
+  (if (string= system-type "darwin")
+      (set-face-font 'default "-*-inconsolata-medium-r-*-*-16-*-*-*-*-*-*-*")
+    (set-face-font 'default "-*-inconsolata-medium-r-*-*-17-*-*-*-*-*-*-*")))
 
 
 ;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
