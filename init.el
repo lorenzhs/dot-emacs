@@ -7,6 +7,8 @@
   (setq ns-right-alternate-modifier nil)
   (setq ns-alternate-modifier 'meta)
   (global-set-key (kbd " ") " ")
+(setq custom-file "~/.emacs.d/init.el")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -110,7 +112,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face 'flyspell-incorrect)
- '(lsp-clients-clangd-executable "/usr/bin/clangd-18")
+ '(lsp-clients-clangd-executable "/usr/bin/clangd-22")
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-ignore-duplicate t)
  '(lsp-ui-sideline-show-code-actions t)
