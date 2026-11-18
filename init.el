@@ -3,9 +3,14 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;(package-initialize)
-(setq mac-option-modifier 'none)
+(when (eq system-type 'darwin)
+  (when (featurep 'native-compile)
+    (require 'comp)
+    (setq native-comp-driver-options
+          (cons "-mmacosx-version-min=11" native-comp-driver-options)))
+  (setq mac-option-modifier 'none)
   (setq ns-right-alternate-modifier nil)
-  (setq ns-alternate-modifier 'meta)
+  (setq ns-alternate-modifier 'meta))
   (global-set-key (kbd " ") " ")
 (setq custom-file "~/.emacs.d/init.el")
 
@@ -112,7 +117,6 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face 'flyspell-incorrect)
- '(lsp-clients-clangd-executable "/usr/bin/clangd-22")
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-ignore-duplicate t)
  '(lsp-ui-sideline-show-code-actions t)
@@ -1502,10 +1506,11 @@
 
 ;;; DEAL WITH GNOME INTEGRATION
 ;;; save & shutdown when we get an "end of session" signal on dbus
-(require 'dbus)
+(when (and (eq system-type 'gnu/linux) (featurep 'dbusbind))
+  (require 'dbus)
 
-(defun my-register-signals (client-path)
-  "Register for the 'QueryEndSession' and 'EndSession' signals from
+  (defun my-register-signals (client-path)
+    "Register for the 'QueryEndSession' and 'EndSession' signals from
 Gnome SessionManager.
 
 When we receive 'QueryEndSession', we just respond with
@@ -1513,31 +1518,37 @@ When we receive 'QueryEndSession', we just respond with
 append this EndSessionResponse to kill-emacs-hook, and then call
 kill-emacs.  This way, we can shut down the Emacs daemon cleanly
 before we send our 'ok' to the SessionManager."
-  (setq my-gnome-client-path client-path)
-  (let ( (end-session-response (lambda (&optional arg)
-                                 (dbus-call-method-asynchronously
-                                  :session "org.gnome.SessionManager" my-gnome-client-path
-                                  "org.gnome.SessionManager.ClientPrivate" "EndSessionResponse" nil
-                                  t "") ) ) )
-         (dbus-register-signal
-          :session "org.gnome.SessionManager" my-gnome-client-path
-          "org.gnome.SessionManager.ClientPrivate" "QueryEndSession"
-          end-session-response )
-         (dbus-register-signal
-          :session "org.gnome.SessionManager" my-gnome-client-path
-          "org.gnome.SessionManager.ClientPrivate" "EndSession"
-          `(lambda (arg)
-             (add-hook 'kill-emacs-hook ,end-session-response t)
-             (kill-emacs) ) ) ) )
+    (setq my-gnome-client-path client-path)
+    (let ( (end-session-response (lambda (&optional arg)
+                                   (dbus-call-method-asynchronously
+                                    :session "org.gnome.SessionManager" my-gnome-client-path
+                                    "org.gnome.SessionManager.ClientPrivate" "EndSessionResponse" nil
+                                    t "") ) ) )
+      (dbus-register-signal
+       :session "org.gnome.SessionManager" my-gnome-client-path
+       "org.gnome.SessionManager.ClientPrivate" "QueryEndSession"
+       end-session-response )
+      (dbus-register-signal
+       :session "org.gnome.SessionManager" my-gnome-client-path
+       "org.gnome.SessionManager.ClientPrivate" "EndSession"
+       `(lambda (arg)
+          (add-hook 'kill-emacs-hook ,end-session-response t)
+          (kill-emacs) ) ) ) )
 
-;; DESKTOP_AUTOSTART_ID is set by the Gnome desktop manager when emacs
-;; is autostarted.  We can use it to register as a client with gnome
-;; SessionManager.
-(dbus-call-method-asynchronously
- :session "org.gnome.SessionManager"
- "/org/gnome/SessionManager"
- "org.gnome.SessionManager" "RegisterClient" 'my-register-signals
- "Emacs server" (getenv "DESKTOP_AUTOSTART_ID"))
+  ;; DESKTOP_AUTOSTART_ID is set by the Gnome desktop manager when emacs
+  ;; is autostarted.  We can use it to register as a client with gnome
+  ;; SessionManager.
+  (dbus-call-method-asynchronously
+   :session "org.gnome.SessionManager"
+   "/org/gnome/SessionManager"
+   "org.gnome.SessionManager" "RegisterClient" 'my-register-signals
+   "Emacs server" (getenv "DESKTOP_AUTOSTART_ID")))
+
+(setq lsp-clients-clangd-executable
+      (if (eq system-type 'darwin)
+          "/opt/homebrew/opt/llvm@22/bin/clangd"
+        "/usr/bin/clangd-22"))
+
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
 
