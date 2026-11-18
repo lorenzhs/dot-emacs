@@ -1,11 +1,16 @@
+;;; init.el --- -*- lexical-binding: nil -*-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;(package-initialize)
+;; Third-party packages without a lexical-binding cookie: log, don't pop up.
+(add-to-list 'warning-suppress-types '(files missing-lexbind-cookie))
 (when (eq system-type 'darwin)
   (when (featurep 'native-compile)
     (require 'comp)
+    (setq native-comp-async-report-warnings-errors 'silent)
+    (setenv "MACOSX_DEPLOYMENT_TARGET" "11.0")
     (setq native-comp-driver-options
           (cons "-mmacosx-version-min=11" native-comp-driver-options)))
   (setq mac-option-modifier 'none)
@@ -309,7 +314,6 @@
 ;(push 'ecb my-el-get-packages)
 (push 'ess my-el-get-packages) ; for R
 (push 'lua-mode my-el-get-packages)
-(push 'mmm-mode my-el-get-packages)
 (push 'php-mode my-el-get-packages)
 (push 'protobuf-mode my-el-get-packages)
 (push 'python-mode my-el-get-packages)
@@ -511,7 +515,7 @@
 (setq projectile-indexing-method 'alien)    ; delegate entirely to git ls-files, fastest
 (setq projectile-git-submodule-command nil) ; disable recursing into submodules
 ; (setq projectile-enable-caching t)          ; enable caching of project file lists
-(projectile-global-mode)
+(projectile-mode 1)
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
