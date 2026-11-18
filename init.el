@@ -312,7 +312,7 @@
 (push 'scala-mode my-el-get-packages)
 (push 'thrift-mode my-el-get-packages)
 (push 'tt-mode my-el-get-packages)
-(push 'rust-mode my-el-get-packages)
+(push 'rustic my-el-get-packages)
 ;(push 'wikitext-mode my-el-get-packages)
 ;(push 'csharp-mode my-el-get-packages)
 
@@ -489,7 +489,7 @@
 
 ;; cap'n'proto
 
-(autoload 'capnp-mode "capnp-mode" "Capnp Mode" t)
+;(autoload 'capnp-mode "capnp-mode" "Capnp Mode" t)
 
 (add-to-list 'auto-mode-alist '("\\.capnp$" . capnp-mode))
 
